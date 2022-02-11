@@ -1,0 +1,153 @@
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+body {
+    margin: 0;
+}
+
+a {
+    color: #337ab7;
+    text-decoration: none;
+}
+img {
+    border: 0;
+    vertical-align: middle;
+}
+.clear{
+    clear:both;
+}
+.flink{
+    cursor:pointer;
+}
+.note_vlidation{
+    border: 2px solid #ca5050;
+    border-radius: 4px;
+    padding: 9px;
+    font-size: 14px;
+    background: #ffdcdc;
+    color: #ca5050;
+}
+.note_ok{
+    border: 2px solid #88a758;
+    border-radius: 4px;
+    padding: 9px;
+    font-size: 14px;
+    background: #dcffe5;
+    color: #2f3124;
+}
+
+._form_note{
+    margin: 5px 0 0 0;
+
+}
+
+/*Pagination */
+#pages{
+    margin: auto;
+    height: 100%;
+    width: 45%;
+    background-color: #F5F8F9;
+    color: #034D8A;
+}
+
+.pages_button_back_next_current,.pages_button_back_next,.pages_regular{
+    background: linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 0%, rgba(242, 242, 242, 1) 100%, rgba(242, 242, 242, 1) 100%);
+}
+
+.pages_button_back_next{
+    margin: 0 10px;
+    color: #034D8A;
+
+}
+
+.pages_button_back_next_current{
+    color:#AEAEAE;
+    margin: 0 10px;
+}
+
+.pages_regular{
+    color: #034D8A;
+}
+
+
+.pages_current{
+    color: #fff;
+    background-color: #5992ff;
+    /*background: -webkit-linear-gradient(270deg, rgba(3, 89, 160, 1) 0%, rgba(3, 89, 160, 1) 0%, rgba(2, 50, 89, 1) 100%, rgba(2, 50, 89, 1) 100%);*/
+    /*background: -moz-linear-gradient(180deg, rgba(3, 89, 160, 1) 0%, rgba(3, 89, 160, 1) 0%, rgba(2, 50, 89, 1) 100%, rgba(2, 50, 89, 1) 100%);*/
+    /*background: linear-gradient(180deg, rgba(3, 89, 160, 1) 0%, rgba(3, 89, 160, 1) 0%, rgba(2, 50, 89, 1) 100%, rgba(2, 50, 89, 1) 100%);*/
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.pages_number{
+    float: left;
+    padding:10px 15px;
+    margin:5px 0 0 0;
+    text-align:center;
+    background-color: #FFFFFF;
+
+    font-style: normal;
+    font-size: 18px;
+    text-decoration:none;
+    border:1px solid #eaeaea;
+    cursor: pointer;
+}
+
+.pages_regular:hover ,.pages_button_back_next:hover{
+    background: #034D8A;
+    color: #FFFFF7;
+}
+
+.object_pagination{
+    max-width: 756px;
+    margin: 0 auto;
+}
+
+/* быстрое редактирование*/
+#jmtreeedit{
+    position: absolute;
+    left:0;
+    top:0;
+    z-index: 99999;
+    padding: 5px;
+    opacity: 0.4;
+    font-weight: 700;
+    background:#DC322F;
+    display: none;
+}
+.jmtreeedit_hover:hover{
+    outline: 1px solid #ff0f00; /* Параметры рамки */
+}
+.text-uc{
+    text-transform: uppercase;
+}
+.main_call_inp::-webkit-input-placeholder {color:#b26c0a;}
+.main_call_inp::-moz-placeholder          {color:#b26c0a;}/* Firefox 19+ */
+.main_call_inp:-moz-placeholder           {color:#b26c0a;}/* Firefox 18- */
+.main_call_inp:-ms-input-placeholder      {color:#b26c0a;}
+
+.main_call_inp::-webkit-input-placeholder {color:#b26c0a;}
+.main_call_inp::-moz-placeholder          {color:#b26c0a;}/* Firefox 19+ */
+.main_call_inp:-moz-placeholder           {color:#b26c0a;}/* Firefox 18- */
+.main_call_inp:-ms-input-placeholder      {color:#b26c0a;}
+
+input:focus::-webkit-input-placeholder {color: transparent}
+input:focus::-moz-placeholder  {color: transparent}
+input:focus:-moz-placeholder  {color: transparent}
+input:focus:-ms-input-placeholder {color: transparent}
+
+textarea:focus::-webkit-input-placeholder {color: transparent}
+textarea:focus::-moz-placeholder  {color: transparent}
+textarea:focus:-moz-placeholder  {color: transparent}
+textarea:focus:-ms-input-placeholder {color: transparent}
+
+.float_left{
+    float:left;
+}
+.float_right{
+    float:right;
+}

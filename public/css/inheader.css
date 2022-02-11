@@ -1,0 +1,19 @@
+#blackout{top:0;left:0;position:fixed;background-color:#000;opacity:.5;height:251%;width:100%;display:none;z-index:100}
+#jump_block{position:absolute;z-index:9999999;display:none;left:0;right:0;top:0;margin:auto}
+@media only screen and (max-width:999px){
+    .down_selectors_A,.down_selectors_B{
+        float:none!important;width:auto!important;margin:0 5px 0 5px}
+    #bottom{display:none;height:240px!important}
+    #active_top_big_button{width:auto!important;margin:0 5px!important}
+    .top_bg_bamper{height:240px;padding:10px 0 0 0!important}
+    #top_h_right{float:none!important;background:#fff;z-index:9999;position:absolute;width:auto;right:0;width:250px;display:none;-webkit-box-shadow:-7px 6px 21px -1px rgba(0,0,0,.74);-moz-box-shadow:-7px 6px 21px -1px rgba(0,0,0,.74);box-shadow:-7px 6px 21px -1px rgba(0,0,0,.74)}
+    .top_selectors_bold{float:none!important;width:auto!important}
+    #sendwich_menu_button{display:block;margin-top:14px;width:40px;float:right;height:40px;cursor:pointer;padding:0 10px 0 0}
+    #fa-sendwich{font-size:35px;color:#034d8a}
+    .sandwich_close{float:right;width:40px;height:40px;cursor:pointer;background:url(/usr/img/sprite.png) no-repeat 50% 50%;margin:10px 6px 0 0}
+    .sandwich_close_cont{height:60px}
+    .top_selectors_bold{border-bottom:1px solid #e8e8e8}
+    .topm_first{border-radius:0}
+    .topm_last{border-radius:0}
+}
+

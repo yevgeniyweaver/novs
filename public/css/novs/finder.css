@@ -1,0 +1,681 @@
+*:focus {outline: none;}
+.finder-open-bg {
+    padding: 20px 10px;
+    display: none;
+    background-color: #dbdbdb;
+}
+.finder-open-btn {
+    font-size: 16px;
+    text-align: center;
+    font-weight: bold;
+    height: 60px;
+    padding: 18px 0;
+    border-radius: 5px;
+    cursor: pointer;
+    /*background-color: #304291;*/
+    background-color: #3b5b77;
+    color: #ffffff;
+}
+.finder-open-btn-box {
+    margin: 0 auto;
+    width: 220px;
+}
+.finder-open-btn-box svg {
+    float: left;
+    padding: 2px 0;
+}
+.finder-open-btn-word {
+    padding-top: 1px;
+}
+.main-bg{
+    /*background: url("/usr/img/builders.png") no-repeat;*/
+    width: 100%;
+    position: relative;
+    /*min-height: 500px;*/
+    margin: 0 auto;
+    background-position: center center;
+    background-size: cover;
+    -webkit-box-shadow: inset 1px 15px 15px -8px rgba(23, 21, 23, 0.25);
+    -moz-box-shadow: inset 1px 15px 15px -8px rgba(23, 21, 23, 0.25);
+    box-shadow: inset 1px 15px 15px -8px rgba(23, 21, 23, 0.25);
+}
+.main-find-overlay{
+    /*position: absolute;*/
+    bottom: 0;
+    width: 100%;
+    background-color: rgba(0, 42, 78, 0.77);
+}
+.main-content {
+    margin: 0 auto;
+    min-height: 207px;
+    width: 100%;
+    max-width: 1350px;
+    padding: 0 10px;
+}
+.main-title {
+    text-align: center;
+    margin: 11px auto 14px auto;
+    font-size: 24px;
+    color: #fff5fa;
+}
+.main-find {
+    padding: 14px 20px 20px 20px;
+    border-radius: 3px;
+}
+.find_icon{
+    color: #6d6d6d;
+    font-size: 13px;
+    float: right;
+    padding: 6px 0;
+}
+.main-input-cont{
+    margin: 0 auto;
+}
+.main-find-cont-one{
+    float: left;
+    width: 100%;
+    max-width: 830px;
+}
+.main-find-cont-two{
+    float: left;
+    width: 100%;
+    max-width: 460px;
+}
+.main-find-cont-three{
+    float: left;
+    width: 100%;
+    max-width: 370px;
+}
+.main-find-cont-four{
+    float: left;
+    width: 100%;
+    max-width: 460px;
+}
+.main-find-cont-five{
+    float: right;
+    width: 100%;
+    max-width: 460px;
+}
+.m-inpt {
+    padding: 10px;
+    width: 100%;
+    font-size: 18px;
+    color: #a2999d;
+    border-width: 1px;
+    border-color: #e9e9e9;
+}
+.main-input {
+    float: left;
+    max-width: 600px;
+    width: 100%;
+    margin-top: 10px;
+}
+.inpt {
+    padding: 9px;
+    width: 100%;
+    font-family: Exo2;
+    font-size: 18px;
+    border-radius: 5px;
+}
+.main-find-price-box{
+    width: 370px;
+    float: left;
+}
+.main-find-price-f{
+    width: 177px;
+    margin: 10px 0 0 0;
+    float: left;
+}
+.main-find-price-l{
+    width: 177px;
+    margin: 10px 0 0 0;
+    float: right;
+}
+.main-find-hr-box{
+    float: left;
+    width: 4%;
+}
+.main-find-hr{
+    padding: 0 1px;
+    max-width: 4px;
+    width: 100%;
+    float: none;
+    margin: 33px auto 0 auto;
+}
+.m-f-price-input{
+    width: 100%;
+    padding: 12px 11px;
+    font-size: 18px;
+    border-radius: 5px;
+    border:solid 1px #fff;
+}
+.main-find-price {
+    position: relative;
+    /*display: inline-block;*/
+    vertical-align: middle;
+    margin-left: 12px;
+    margin-top: 10px;
+    width: 174px;
+    box-shadow: #f2d439;
+}
+/*.m-f-price-btn {*/
+/*position: relative;*/
+/*z-index: 2;*/
+/*width: 100%;*/
+/*overflow: hidden;*/
+/*text-overflow: ellipsis;*/
+/*text-align: left;*/
+/*padding: 10px;*/
+/*font-size: 18px;*/
+/*background-color: #ffffff;*/
+/*color: #b4abaf;*/
+/*border-width: 1px;*/
+/*border-color: #5992ff;*/
+/*}*/
+/*.m-f-price-dropdown-menu{*/
+/*position: absolute;*/
+/*top: 45px;*/
+/*z-index: 1;*/
+/*background: rgba(229, 184, 30, 0.7);*/
+/*border-radius: 0 0 5px 5px;*/
+/*border: solid 2px #e5b81e;*/
+/*border-top-width: 10px;*/
+/*border-top-color: transparent;*/
+/*height: 55px;*/
+/*width: inherit;*/
+/*display: none;*/
+/*}*/
+/*.m-f-price-dropdown-group{*/
+/*margin: 0 auto;*/
+/*width: 152px;*/
+/*}*/
+/*#m-f-price-first, #m-f-price-last{*/
+/*float: left;*/
+/*width: 52px;*/
+/*margin: 0px 1px;*/
+/*text-align: center;*/
+/*font-size: 16px;*/
+/*}*/
+/*.m-f-price-text{*/
+/*float: left;*/
+/*}*/
+
+/*.find-price-divider{*/
+/*float: left;*/
+/*width: 5px;*/
+/*padding: 5px 2px;*/
+/*border-bottom: solid 2px;*/
+/*display: none;*/
+/*}*/
+/*.find-price-field-1:focus,.find-price-field-2:focus{*/
+/*border-color: red;*/
+/*}*/
+/*.find-price-field-1,.find-price-field-2{*/
+/*padding: 6px 1px;*/
+/*width: 63px;*/
+/*float: left;*/
+/*margin: 0 5px;*/
+/*text-align: center;*/
+/*font-size: 14px;*/
+/*border: solid 2px #e5b81e;*/
+/*border-radius: 5px;*/
+/*color: #877e82;*/
+/*outline-color: transparent;*/
+/*}*/
+.bd-params {
+    border-style: solid;
+    border-radius: 5px;
+}
+.chbx {
+    padding: 11px;
+    font-family: Exo2;
+    color: #092e4e;
+    font-size: 18px;
+    border-radius: 5px;
+}
+.main-find-year{
+    float: left;
+    margin: 10px 0 0 15px ;
+    background-color: #fff;
+    width: 172px;
+    border-radius: 5px;
+    color: #b4abaf;
+    font-size: 18px;
+}
+.main-find-city{
+    position: relative;
+    float: left;
+    margin: 10px 0 0 14px ;
+    background-color: #fff;
+    width: 215px;
+    border-radius: 5px;
+    color: #b4abaf;
+    font-size: 18px;
+}
+.main-find-city-btn{
+    padding: 11px 5px;
+    font-size: 17px;
+    width: 100%;
+    height: 47px;
+    border: none;
+    color: #b4abaf;
+    outline: none;
+    cursor: pointer;
+}
+.class_black{
+    color: #000000;
+}
+.main-find-city-drop{
+    display: none;
+    margin: 2px auto;
+    position: absolute;
+    z-index: 20;
+    background-color: white;
+    width: 100%;
+    color: black;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    -webkit-box-shadow: 0px 4px 13px 0px rgba(110,110,110,1);
+    -moz-box-shadow: 0px 4px 13px 0px rgba(110,110,110,1);
+    box-shadow: 0px 4px 13px 0px rgba(110,110,110,1);
+}
+.main-find-city-drop-item{
+    padding: 4px 6px;
+    cursor: pointer;
+}
+.main-find-city-drop-item:hover{
+    background-color: rgba(0, 42, 78, 0.77);
+    color: white;
+}
+.main-find-rayon{
+    position: relative;
+    float: left;
+    margin: 10px 0 0 15px ;
+    background-color: #fff;
+    width: 215px;
+    border-radius: 5px;
+    color: #b4abaf;
+    font-size: 18px;
+}
+.main-find-rayon-btn{
+    padding: 11px 5px;
+    font-size: 18px;
+    width: 100%;
+    height: 47px;
+    border: none;
+    color: #b4abaf;
+    outline: none;
+    cursor: pointer;
+}
+.main-find-rayon-drop{
+    display: none;
+    margin: 2px auto;
+    position: absolute;
+    z-index: 20;
+    background-color: white;
+    width: 100%;
+    color: black;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    -webkit-box-shadow: 0px 4px 13px 0px rgba(110,110,110,1);
+    -moz-box-shadow: 0px 4px 13px 0px rgba(110,110,110,1);
+    box-shadow: 0px 4px 13px 0px rgba(110,110,110,1);
+}
+.main-find-rayon-drop-item{
+    padding: 4px 6px;
+    cursor: pointer;
+}
+.main-find-rayon-drop-item:hover{
+    background-color: rgba(0, 42, 78, 0.77);
+    color: white;
+}
+.main-find-room{
+    position: relative;
+    float: left;
+    margin: 10px 0 0 15px ;
+    background-color: #fff;
+    width: 215px;
+    border-radius: 5px;
+    color: #282224;
+    font-size: 18px;
+}
+.main-find-year{
+    position: relative;
+    float: left;
+    margin: 10px 0 0 15px ;
+    background-color: #fff;
+    width: 215px;
+    border-radius: 5px;
+    color: #282224;
+    font-size: 18px;
+}
+.main-find-year-btn{
+    padding: 11px 5px;
+    font-size: 18px;
+    width: 100%;
+    height: 47px !important;
+    border: none;
+    color: #b4abaf;
+    outline: none;
+}
+.main-find-room-btn{
+    padding: 11px 5px;
+    font-size: 18px;
+    width: 100%;
+    height: 47px !important;
+    border: none;
+    color: #b4abaf;
+    outline: none;
+}
+.main-submit {
+    float: left;
+    margin-left: 15px;
+    max-width: 215px;
+    width: 100%;
+    margin-top: 10px;
+    color: white;
+}
+.sbmt {
+    padding: 13px 10px 12px 10px;
+    background-color: #f61f0b;
+    width: 100%;
+    font-family: Exo2;
+    font-size: 18px;
+    border-radius: 5px;
+    border:none;
+    color:#fff;
+    cursor: pointer;
+}
+.main-find-state{
+    float: left;
+    margin: 10px 0 0 15px;
+    width: 215px;
+    padding: 3px 1px;
+    color: #fff;
+    font-size: 18px;
+    background-color: rgba(250, 248, 248, 0.22);
+    border-radius: 5px;
+}
+.main-find-state-box{
+    margin: 0 auto;
+    width: 202px;
+}
+
+.partners-login-block{  width: 100%;  font-size: 16px;  }
+.partners-login-block, input{  font-size: 16px;  }
+.partners-login-box{  max-width: 300px;  padding: 60px 5px 50px 5px;  width: 100%;  min-height: 500px;  margin: 0 auto;  }
+.partners-login-title {  padding-bottom: 35px;  font-size: 22px;  font-weight: bold;  text-align: center;  color: #152050;  }
+.partners-login-input{  margin-bottom: 18px;  width: 100%;  max-width: 293px;  padding: 14px 0px 14px 5px;  border-radius: 6px;  outline: none;  border: solid 1px #b6c1c8; border-bottom: solid 3px #b6c1c8;  text-align: left;  }
+
+.state-new-checkbox{  float: left;  text-align: center;  padding: 0 8px 0 3px; height: 41px;  cursor: pointer;  }
+.state-old-checkbox{  float: left;  text-align: center;  padding: 0 0 0 0; height: 41px;   }
+.state-new-checkbox input[type=checkbox]{
+    outline: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    margin: 8px 0px;
+    float: left;
+    padding: 11px;
+    cursor: pointer;
+    /*background-color: #fafafa;*/
+    border: 1px solid #f5f9f9;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05);
+    border-radius: 3px;  display: inline-block;  position: relative;
+}
+.state-old-checkbox input[type=checkbox]{
+    outline: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    margin: 8px 0px;
+    float: left;
+    padding: 11px;
+    cursor: pointer;
+    /*background-color: #fafafa;*/
+    border: 1px solid #f5f9f9;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05);
+    border-radius: 3px;  display: inline-block;  position: relative;
+}
+.state-new-checkbox input[type=checkbox]:active{  box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px 1px 3px rgba(0,0,0,0.1);  }
+.state-new-checkbox input[type=checkbox]:checked:active {  box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px 1px 3px rgba(0,0,0,0.1);  }
+.state-new-checkbox input[type=checkbox]:checked {   background-color: #e9ecee;  border: 1px solid rgba(0, 42, 78, 0.8);  box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px 1px 3px rgba(0,0,0,0.1); }
+.state-new-checkbox input[type=checkbox]:checked:after {  content: '\2714'; font-size: 17px;  position: absolute;  top: 0;  font-weight: bold;  left: 4px;  color: #219123;  }
+.state-new-checkbox label{  margin: 7px 0 0 8px ;  float: left; font-weight: 400; cursor: pointer;}
+
+
+.state-old-checkbox input[type=checkbox]:active{  box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px 1px 3px rgba(0,0,0,0.1);  }
+.state-old-checkbox input[type=checkbox]:checked:active {  box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px 1px 3px rgba(0,0,0,0.1);  }
+.state-old-checkbox input[type=checkbox]:checked {   background-color: #e9ecee;  border: 1px solid rgba(0, 42, 78, 0.8);  box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px 1px 3px rgba(0,0,0,0.1);  }
+.state-old-checkbox input[type=checkbox]:checked:after { content: '\2714'; font-size: 17px;  position: absolute;  top: 0;  font-weight: bold;  left: 4px;  color: #219123;  }
+/*.state-old-checkbox input[type=checkbox]:checked:after {  content: '\2714';  font-size: 19px;  position: absolute;  top: -1px;  font-weight: bold;  left: 6px;  color: #304291;  }*/
+.state-old-checkbox label{  margin: 7px 0 0 8px ;  float: left; font-weight: 400; cursor: pointer; }
+
+.partners-login-submit-box{  padding-bottom: 18px;  }
+.partners-login-submit{  width: 100%;  color: white;  padding: 14px 0px 14px 0px;  background-color: #304291;  border-radius: 6px;  }
+.partners-login-member-btn{  width: 100%; /* height: 50px;*/  padding: 13px 0px;  text-align: center; border: solid 2px #ffc000;  border-radius: 6px;  }
+
+.main-map-find {
+    width: 215px;
+    float: left;
+    margin: 10px 0 0 15px;
+}
+
+.btn-find-map {
+    font-family: Exo2;
+    font-size: 18px;
+    display: block;
+    padding: 9px 9px;
+    border-width: 2px;
+    border-style: solid;
+    border-radius: 5px;
+    color: #fff2f2;
+}
+.btn-find-map:hover {
+    color: #e5b81e;
+}
+.icon-map {
+    font-size: 19px;
+    padding-right: 2px;
+}
+
+
+
+
+
+
+
+
+
+@media (max-width: 1400px) {
+    .main-content{
+        max-width: 890px;
+    }
+    .main-find-rayon{
+        margin: 10px 0 0 0;
+    }
+    .main-find-year{
+        margin: 10px 0 0 0;
+    }
+    .main-find-cont-five{
+        max-width: 369px;
+    }
+    .main-map-find{
+        width: 177px;
+        margin: 10px 0 0 0;
+    }
+    .main-submit{
+        max-width: 177px;
+    }
+}
+
+@media (max-width: 999px) {
+    .main-bg {
+        display: none;
+    }
+
+    .finder-open-bg {
+        display: block;
+    }
+}
+
+@media (max-width: 950px) {
+    .main-input-cont {
+        margin: 0 auto;
+        max-width: 546px;
+    }
+    .main-input{
+        max-width: 265px;
+    }
+    .main-find-city{
+        width: 265px;
+    }
+    .main-find-cont-two{
+        max-width: unset;
+    }
+    .main-find-year{
+        width: 265px;
+    }
+    .main-find-state{
+        width: 265px;
+    }
+    .main-find-cont-three{
+        max-width: unset;
+    }
+    .main-find-room{
+        width: 265px;
+    }
+    .main-find-price-box{
+        width: 100%;
+    }
+    .main-find-price-l{
+        width: 262px;
+    }
+    .main-find-price-f{
+        width: 262px;
+    }
+    .main-find-cont-four{
+        max-width: unset;
+    }
+    .main-find-cont-five {
+        max-width: unset;
+    }
+    .main-find-rayon {
+        width: 265px;
+        margin: 10px 0 0 0;
+    }
+    .main-map-find{
+        width: 265px;
+    }
+    .main-submit{
+        max-width: 265px;
+    }
+}
+
+
+@media (max-width: 670px) {
+
+    .main-find-cont-one {
+        float: none;
+        margin: 0 auto;
+    }
+    .main-find-price {
+        margin: 10px 0 0 0 ;
+    }
+}
+
+
+@media (max-width: 630px) {
+
+    .main-find-overlay {
+        position: inherit;
+    }
+    .main-input-cont {
+        max-width: 420px;
+    }
+    .main-find-cont-two{
+        max-width: none;
+    }
+    .main-find-cont-four {
+        float: right;
+        width: 100%;
+        max-width: none
+    }
+    .main-input{
+        max-width: 420px;
+    }
+    .main-find-city{
+        margin: 10px 0 0 0;
+        width: 100%;
+    }
+    .main-find-rayon{
+        margin: 10px 0 0 0;
+        width: 100%;
+    }
+    .main-find-room {
+        margin: 10px 0 0 0;
+        width: 100%;
+    }
+    .main-find-year{
+        margin: 10px 0 0 0;
+        width: 100%;
+        max-width: none;
+    }
+    .main-find-price-box{
+        width: 100%;
+    }
+    .main-find-price-f, .main-find-price-l{
+        width: 48%;
+    }
+    .main-find-state{
+        width: 100%;
+        margin: 10px 0 0 0;
+    }
+    .main-map-find {
+        float: none !important;
+        margin: 10px auto;
+    }
+    .main-submit {
+        float: none;
+        margin: 10px auto;
+    }
+}
+
+
+@media (max-width: 375px) {
+
+    .main-find-hr {
+        margin: 33px 1px 0 2px;
+    }
+}
+
+@media (max-width: 500px) {
+
+    .main-find-price-f, .main-find-price-l {
+        width: 48%;
+    }
+}
+
+@media (max-width: 440px) {
+    .main-find-cont-two{
+        float: none;
+        margin: 0 auto;
+        max-width: none;
+        width: 100%;
+    }
+    .main-find-cont-three{
+        float: none;
+        margin: 0 auto;
+    }
+    .main-find-price {
+        width: 100%;
+        max-width: none;
+    }
+    .main-find-year{
+        width: 100%;
+        max-width: none;
+    }
+    .main-find-hr {
+        max-width: 3px;
+        width: 100%;
+        /*margin: 33px 1px 0 2px;*/
+    }
+}

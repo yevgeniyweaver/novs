@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title><?php if(isset(K_SEO::$title)){
+        echo K_SEO::$title;
+    }?></title>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
+    <link href="/upload/<?=$developer['favicon']?>" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1"/>
+    <?php if (isset(K_SEO::$description)): ?>
+        <meta name="description" content='<?= K_SEO::$description; ?>'>
+    <?php endif; ?>
+    <link rel='canonical' href="<?=AllConfig::$protocol.K_Url::getSubdomen().'.'.AllConfig::$domen.K_Url::get()->getPath()?>" />
+
+
+    <meta property="og:title" content="<?= $this->title ?>">
+    <meta property="og:url" content="<?=AllConfig::$protocol.K_Url::getSubdomen().'.'.AllConfig::$domen.K_Url::thisUlr()?>">
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="<?= $this->mdesc ?>">
+    <meta property="og:site_name" content="Все новостройки Одессы">
+    <meta property="og:image:width" content="968">
+    <meta property="og:image:height" content="504">
+
+    <? $img = K_SEO::getOg('image');
+
+    if (!empty($img) && count($img) > 0) {
+
+        foreach ($img as $v) {
+            ?>
+
+            <meta property="og:image" content="<?= AllConfig::$site . $v ?>"/>
+            <meta property="og:image:secure_url" content="<?= allConfig::$site . $v ?>"/>
+            <meta name="twitter:image" content="<?= AllConfig::$site . $v ?>">
+            <?
+        }
+
+    } else {
+        ?>
+
+        <meta property="og:image" content="<?= allConfig::$site ?>/upload/<?= $developer['logo']?>"/>
+        <meta property="og:image:secure_url" content="<?= allConfig::$site ?>/upload/<?= $developer['logo']?>"/>
+        <meta name="twitter:image" content="<?= allConfig::$site ?>/upload/<?= $developer['logo']?>">
+
+    <? } ?>
+
+<!---->
+<!--    <meta property="og:title" content="" />-->
+<!--    <meta property="og:description" content="" />-->
+<!--    <meta property="og:site_name" content="" />-->
+<!--    <meta property="og:type" content="" />-->
+<!--    <meta property="og:url" content="" />-->
+<!--    <meta property="og:image" content="" />-->
+
+
+
+<!--    --><?php //vd1(K_Url::getSubdomen());?>
+    <script>
+        (function () {
+            function addFont() {
+                var style = document.createElement('style');
+                style.rel = 'stylesheet';
+                document.head.appendChild(style);
+                style.textContent = localStorage.sourceSansPro;
+            }
+
+            try {
+                if (localStorage.sourceSansPro) {
+                    // The font is in localStorage, we can load it directly
+                    addFont();
+                } else {
+                    // We have to first load the font file asynchronously
+                    var request = new XMLHttpRequest();
+                    request.open('GET', '/usr/fonts/exo2/font.css', true);
+
+                    request.onload = function () {
+                        if (request.status >= 200 && request.status < 400) {
+                            // We save the file in localStorage
+                            localStorage.sourceSansPro = request.responseText;
+
+                            // ... and load the font
+                            addFont();
+                        }
+                    };
+
+                    request.send();
+                }
+            } catch (ex) {
+                // maybe load the font synchronously for woff-capable browsers
+                // to avoid blinking on every request when localStorage is not available
+            }
+        }());
+    </script>
+
+    <!-- Facebook Pixel Code -->
+    <script>
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+            n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+            if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+            n.queue=[];t=b.createElement(e);t.async=!0;
+            t.src=v;s=b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t,s)}(window, document,'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '1910120462620341');
+        fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+                   src="https://www.facebook.com/tr?id=1910120462620341&ev=PageView&noscript=1"
+        /></noscript>
+    <!-- End Facebook Pixel Code -->
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-146514107-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-146514107-1');
+    </script>
+
+
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+            m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+        ym(21260017, "init", {
+            id:21260017,
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true,
+            webvisor:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/21260017" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+
+    <style>
+        @import "https://cssicon.space/css/icons.css";
+
+        .icon, .icon:before, .icon:after, .icon i, .icon i:before, .icon i:after {
+            transition: all 0.4s ease;
+        }
+        #jk_slider{
+            touch-action: pinch-zoom;
+        }
+        body {
+            font-family: "Exo2";
+        }
+        .header-col{
+            float: left;
+            width: 20%;
+        }
+        .brand{
+            padding-top: 13px;
+            text-align: center;
+            max-width: 200px;
+        }
+        header .h1 {
+            font-size: 34px;
+            color: #092e4e;
+            text-transform: uppercase;
+            font-weight: 700;
+            line-height: 0.2;
+        }
+        header .h3 {
+            font-size: 18px;
+            text-transform: uppercase;
+            line-height: 0.2;
+            color: #092e4e;
+        }
+        .navbar div {
+            display: block;
+            float: left;
+        }
+        .header {
+            /*border-bottom: 1px #2aabd2 solid;*/
+        }
+        .header-box {
+            position: relative;
+            margin: 0 auto;
+            max-width: 1316px;
+            width: 100%;
+            padding-bottom: 14px;
+        }
+        .header-fixed{
+            background-color: #fff;
+            width: 100%;
+            min-height: 87px;
+            z-index: 99;
+        }
+        .header-fixed-active{
+            position: fixed;
+            top: 0;
+            -webkit-box-shadow: 0px 4px 16px -4px rgba(0,0,0,0.65);
+            -moz-box-shadow: 0px 4px 16px -4px rgba(0,0,0,0.65);
+            box-shadow: 0px 4px 16px -4px rgba(0,0,0,0.65);
+        }
+        .menu {
+            display: block;
+        }
+        .header-menu-button {
+            display: none;
+            float: right;
+            padding: 49px 0;
+        }
+        .header-menu-button .header-menu-icon{
+            font-size: 34px;
+        }
+        .menu.icon {
+            float: right;
+            padding: 0px 0;
+            right: 0;
+            width: 30px;
+            height: 3px;
+            color: #0b388c!important;
+            /*color: #321C0D;*/
+            /*color: #000;*/
+            margin-top: 4px;
+            position: absolute;
+            margin-left: 2px;
+            background-color: currentColor;
+        }
+        .menu.icon:before {
+            content: '';
+            position: absolute;
+            top: -8px;
+            left: 0;
+            width: 30px;
+            height: 3px;
+            background-color: currentColor;
+        }
+        .menu.icon:after {
+            content: '';
+            position: absolute;
+            top: 9px;
+            left: 0;
+            width: 30px;
+            height: 3px;
+            background-color: currentColor;
+        }
+        .close.icon {
+            right: 0;
+            /*color: #000;*/
+            color: #0b388c!important;;
+            position: absolute;
+            margin-top: -4px;
+            margin-left: 0;
+            width: 30px;
+            height: 30px;
+            opacity: unset!important;
+        }
+        .close.icon:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 10px;
+            width: 30px;
+            height: 3px;
+            background-color: currentColor;
+            transform: rotate(-45deg);
+        }
+        .close.icon:after {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 10px;
+            width: 30px;
+            height: 3px;
+            background-color: currentColor;
+            transform: rotate(45deg);
+        }
+        .header-logo{
+            width: 175px;
+            height: 61px;
+        }
+        .menu-wraper {
+            float: left;
+            margin: 0 auto;
+        }
+        .menu-col {
+            float: left;
+            padding-top: 31px;
+            width: 112px;
+            text-align: center;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+        }
+        .other-dev{
+            width: 200px;
+        }
+        .other-dev-fav{
+            width: 124px;
+        }
+        .phone {
+            padding-top: 35px;
+            max-width: 230px;
+        }
+        .large {
+            color: #092e4e;
+            font-size: 17px;
+            font-weight: 700;
+            text-align: center;
+            line-height: 1.1;
+        }
+        .index_link {
+            color: #333;
+        }
+        #drop_menu_r {
+            width: 280px;
+        }
+        .drop_menu {
+            left: 0;
+            right: 0;
+            margin: 24px 0;
+            display: none;
+            position: absolute;
+            z-index: 999;
+            width: 974px;
+            font-size: 15px;
+            font-weight: 300;
+            padding: 10px 6px;
+            background-color: rgb(255, 255, 255);
+            text-align: left;
+            -webkit-box-shadow: 0px 5px 17px -4px rgba(0,0,0,0.75);
+            -moz-box-shadow: 0px 5px 17px -4px rgba(0,0,0,0.75);
+            box-shadow: 0px 5px 17px -4px rgba(0,0,0,0.75);
+        }
+        .drop_menu a {
+            color: #000000;
+        }
+        .drop_menu_box{
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .drop_menu_item {
+            float: left;
+            width: 240px;
+            height: 44px;
+            padding: 0 10px;
+            margin: 1px 0;
+            border-bottom: solid;
+            border-width: 1px;
+            border-color: #e1e9ee;
+        }
+        .drop_menu_col {
+            display: inline-block;
+            max-width: 230px;
+        }
+        .fav-menu-col{
+            display: none;
+            width: 70px;
+            padding: 31px 16px 0 0;
+            text-align: right;
+            cursor: pointer;
+            float: right;
+        }
+        .fav-wraper{
+            width: 70px;
+            padding: 31px 16px 0 0;
+            text-align: right;
+            cursor: pointer;
+            float: right;
+        }
+        .main-menu-dev-icon {
+            font-size: 13px;
+            padding-left: 3px
+        }
+        .main-menu-icon {
+            float: left;
+            /*color: #FF7A00;*/
+            color:#ffc107;
+            font-size: 26px!important;
+            padding-right: 3px;
+        }
+        #count_fav{
+            display: block;
+            float: left;
+            padding: 0px 0 0px 6px;
+            font-size: 18px;
+            color:#ffc107;
+            /*color: #FF7A00;*/
+        }
+        .m_breadcrumb{
+            padding: 0 10px;
+        }
+        @media (max-width: 1200px) {
+            .menu-col {
+                /*min-width: 90px;*/
+                /*padding: 31px 13px 0 13px;*/
+            }
+            .header-logo-box{  }
+        }
+        @media (max-width: 1024px) {
+            .header-col{
+                float: none;
+                margin: 0 auto;
+                width: 100%;
+            }
+            .header-mob-fav{
+                position: absolute;
+                float: right;
+                top:0;
+                right: 0;
+                padding: 30px 30px 0 10px;
+            }
+            .menu-wraper {
+                float: none !important;
+            }
+            .brand {
+                margin: 0 auto;
+            }
+            .menu {
+                margin: 0 auto;
+                float: none !important;
+            }
+            .header-box {
+                min-width: 320px;
+                max-width: 770px;
+            }
+            .fav-wraper{
+                display: none;
+            }
+            .fav-menu-col{
+                display: block;
+                padding: 31px 0 0 12px;
+            }
+            .drop_menu {
+                max-width: 740px;
+                margin: 18px 0;
+            }
+        }
+
+        @media (max-width: 750px) {
+
+            .brand {
+                max-width: unset;
+                padding: 0;
+            }
+            .header-logo-box{
+                float: left;
+                padding: 15px 0 0 25px;
+            }
+            .header-logo {
+                width: 150px;
+                height: 52px;
+            }
+            .header-menu-button {
+                display: block;
+                position: relative;
+                height: 25px;
+                width: 40px;
+                /* margin: 0 10px; */
+                margin: 0 20px 0 20px;
+                /* padding: 46px 5px; */
+                padding: 36px 5px 34px 5px;
+                float: left;
+            }
+            .header-mob-fav{
+                position: unset;
+                float: right;
+                padding: 30px 30px 0 10px;
+            }
+            .menu-wraper {
+                display: none;
+                width: 270px;
+                margin: 0 auto;
+                float: none !important;
+                /*width: 250px;*/
+            }
+            .menu-col {
+                width: 100%;
+                float: left;
+                min-width: 133px;
+                padding: 20px 15px 15px 15px;
+                font-weight: 400;
+                border-bottom: solid 1px #0053c024;
+            }
+            .header-box {
+                max-width: 490px;
+            }
+            .drop_menu {
+                max-width: 494px;
+                margin: 66px 0;
+            }
+            .fav-menu-col {
+                width: 100px;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 540px) {
+            .b-nav-home{
+                float: none;
+            }
+            .menu-wraper {
+                width: 300px;
+                padding-top: 10px;
+            }
+            .menu-col {
+                width: 100%;
+                padding: 6px 0;
+                border-bottom: solid 1px #76797d52;
+            }
+            .other-dev{
+                width: 100%;
+            }
+            .other-dev-fav{
+                width: 100%;
+            }
+            .drop_menu {
+                max-width: 300px;
+                margin: 66px auto;
+                height: 506px;
+                overflow: hidden;
+                overflow-y: visible;
+            }
+            .drop_menu_item{
+                width: 100%;
+            }
+            #izbrannoe {
+                margin: 0 auto;
+            }
+        }
+        @media (max-width: 370px){
+            .header-logo-box {
+                float: left;
+                padding: 14px 0px 0 0px;
+            }
+            .header-logo {
+                width: 130px;
+                height: auto;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css">
+    <link rel="stylesheet" href="/usr/plugin/fancybox3/jquery.fancybox.min.css" />
+
+</head>
+
+<?= K_JsCss::Render('css'); ?>
+
+<body itemscope="" itemtype="http://schema.org/WebPage">
+
+
+
+<header id="top" class="header">
+
+    <div class=" header-fixed">
+        <div class="header-box">
+
+            <div class="header-col brand " data-link="\">
+                <div class="header-menu-button">
+                    <div class="menu icon"></div>
+                </div>
+                <div class="header-logo-box" itemscope itemtype="http://schema.org/Organization">
+                    <a href="/" itemprop="url">
+                        <img itemprop="logo" src="/upload/<?= $developer['logo']?>" class="header-logo" alt="Все новострои Одессы">
+                    </a>
+                </div>
+                <div class="header-mob-fav"></div>
+            </div>
+
+            <div class="menu">
+
+
+                <div class="menu-wraper">
+
+                    <div id="dd-btn" class="menu-col other-dev">
+                        Другие застройщики<i class="main-menu-dev-icon fa fa-chevron-down"></i>
+                        <div class="drop_menu builder-dropdown-menu" id="drop_menu_z">
+                            <?php $builders = K_TreeQuery::crt('/builders/')->type('partner')->go(array('type_partner_turn_off'=>''));
+
+                            $builders_count = count($builders);
+                            //vd1(count($builders));
+                            $b_quarter  = intval($builders_count/4);
+                            ?>
+
+
+                            <div class="drop_menu_box">
+                                <?php
+
+
+                                $s = 0;?>
+
+                                <?php
+                                foreach ($builders as $b){
+                                    if($b['turn_off']!="да"){ ?>
+
+<!--                                    <div class="drop_menu_item">-->
+<!--                                        <a href="--><?//=allConfig::$protocol?><!----><?//= $b['tree_name'] . '.' . allconfig::$domen ?><!--">--><?//= $b['name']; ?><!--</a>-->
+<!--                                    </div>-->
+
+                                        <?php if($s==0 || $s==$b_quarter  || $s==$b_quarter*2 || $s==$b_quarter*3){?>
+                                            <div  class="drop_menu_col">
+                                            <div class="drop_menu_item">
+                                                <a href="<?=allConfig::$protocol?><?= $b['tree_name'] . '.' . allconfig::$domen ?>"><?= $b['name']; ?></a>
+                                            </div>
+
+                                        <?php }elseif($s==$b_quarter-1 || $s==$b_quarter*2-1 || $s==$b_quarter*3-1 || $s==$builders_count-1){?>
+                                            <div class="drop_menu_item">
+                                                <a href="<?=allConfig::$protocol?><?= $b['tree_name'] . '.' . allconfig::$domen ?>"><?= $b['name']; ?></a>
+                                            </div>
+                                            </div>
+
+                                        <?php }else{?>
+                                            <div class="drop_menu_item">
+                                                <a href="<?=allConfig::$protocol?><?= $b['tree_name'] . '.' . allconfig::$domen ?>"><?= $b['name']; ?></a>
+                                            </div>
+
+                                        <?php } ?>
+
+                                    <?php }?>
+
+                                    <? $s++;  } ?>
+
+
+                                <div class="clear"></div>
+                            </div>
+
+
+
+                        </div>
+                    </div>
+
+                    <div id="dd-btn2" class="menu-col" style="position: relative">
+                        Районы<i class="main-menu-dev-icon fa fa-chevron-down"></i>
+                        <div class="drop_menu builder-dropdown-menu" id="drop_menu_r">
+
+                            <div class="drop_menu_box">
+                                <div  class="drop_menu_col">
+
+                                    <div class="drop_menu_item">
+                                        <a href="<?=allConfig::$site?>/primorskiy.html">Приморский район</a>
+                                    </div>
+                                    <div class="drop_menu_item">
+                                        <a href="<?=allConfig::$site?>/malinovskiy.html">Малиновский район</a>
+                                    </div>
+                                    <div class="drop_menu_item">
+                                        <a href="<?=allConfig::$site?>/kievskiy.html">Киевский район</a>
+                                    </div>
+                                    <div class="drop_menu_item">
+                                        <a href="<?=allConfig::$site?>/suvorovskiy.html">Суворовский район</a>
+                                    </div>
+                                    <div class="drop_menu_item">
+                                        <a href="<?=allConfig::$site?>/arcadia.html">Аркадия район</a>
+                                    </div>
+                                    <div class="drop_menu_item">
+                                        <a href="<?=allConfig::$site?>/luzanovka.html">Лузановка район</a>
+                                    </div>
+                                    <div class="drop_menu_item">
+                                        <a href="<?=allConfig::$site?>/centr.html">Центр</a>
+                                    </div>
+                                    <div class="drop_menu_item">
+                                        <a href="<?=allConfig::$site?>/cheremushki.html">Черемушки</a>
+                                    </div>
+
+                                    <div class="drop_menu_item">
+                                        <a href="<?=allConfig::$site?>/tairova.html">Таирова</a>
+                                    </div>
+                                    <div class="drop_menu_item">
+                                        <a href="<?=allConfig::$site?>/poskot.html">Поселок Котовского</a>
+                                    </div>
+                                    <div class="drop_menu_item">
+                                        <a href="<?=allConfig::$site?>/moldovanka.html">Молдаванка</a>
+                                    </div>
+                                </div>
+
+                                <div class="clear"></div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+
+                    <div class="menu-col"><a class="index_link" href="/b-sdanie.html">Сданные</a></div>
+
+                    <div class="menu-col"><a class="index_link" href="/b-novie.html">Новые</a></div>
+
+                    <div class="menu-col"><a class="index_link" href="/b-action.html">Акции</a></div>
+
+                    <div class="fav-menu-col">
+
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div class="fav-wraper">
+                    <a id="fav" class="index_link"  <?=This_Favorites::getCountFavourites() ? 'href="/favourites.html"' : ''?>>
+                        <i class="fa <?=This_Favorites::getCountFavourites() ? 'fa-heart' : 'fa-heart-o' ?> main-menu-icon"></i>
+                        <span id="count_fav"><?= This_Favorites::getCountFavourites() > 0 ? This_Favorites::getCountFavourites() : '' ?></span>
+                    </a>
+                </div>
+                <div class="clear"></div>
+            </div>
+
+<!--            <div class="header-col phone">-->
+<!--                <div class="small">Отдел продаж</div>-->
+<!--                <div class="large">+38(048)704 45 67</div>-->
+<!--            </div>-->
+            <div class="clear"></div>
+        </div>
+    </div>
+
+</header>
+
+
+<section class="b-navigation-block">
+    <div class="b-nav-bg">
+        <div class="b-nav-box">
+            <div class="b-nav-tabs">
+                <i class="b-nav-icon fa fa-home"></i>
+                <div class="b-nav-home">
+                        <?= k_crumbs::render() ?>
+                </div>
+
+
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+    <div class="clear"></div>
+</section>
+
+
+<main>
+    <?php
+    if (isset($this->content['main']) && $this->content['main']) {
+        foreach ($this->content['main'] as $v) {
+            echo $v;
+        };
+    };
+    ?>
+</main>
+
+
+<section>
+<!--    <div class="b-footer-form-bg" style="background-color:--><?//= $developer['color'] ?><!--">-->
+    <div class="b-footer-form-bg" style="background-color:rgb(9, 46, 78);>">
+        <div class="b-footer-form-box">
+            <div class="b-footer-form-head">Обратная связь</div>
+            <div id="footer-handler">
+
+
+            </div>
+        </div>
+
+    </div>
+</section>
+<footer>
+    <div class="b-footer-bg">
+        <div class="b-footer-box">
+            <div class="b-footer-title">
+                <a itemprop="url" href="//<?= $_SERVER['HTTP_HOST'] ?>">
+                    <img class="b-footer-logo"
+                         src="/upload/<?= $developer['logo'] ?>"
+                         id="main_logo"
+                         height="55px"
+                         alt="logo">
+                </a>
+                <!--
+                <div class="b-footer-title-t1"><i class="b-footer-icon"></i>Все новострои от</div>
+                <div class="b-footer-title-t2">Будова</div>
+                -->
+            </div>
+            <br>
+            <div class="b-footer-text">
+                Компания является официальным<br> партнером <?= $developer['tree_title'] ?>.<br>
+                Все объекты, представленные на сайте,<br>
+                продаются по ценам от застройщика,<br>
+                без какой либо комиссии.
+            </div>
+
+            <a class="b-footer-contacts" href="/b-contacts.html">Контакты</a>
+<!--            <div class="b-word-nk">-->
+<!--                <br>-->
+<!--                Наши контакты-->
+<!--            </div>-->
+<!--            <div class="b-telephone">-->
+<!--                <div class="b-icon-box">-->
+<!--                    <i class="b-contact-icon fa fa-phone"></i>-->
+<!--                    тел:-->
+<!--                </div>-->
+<!--                <div class="b-phone-info">-->
+<!--                    <div>+38(048)123 12 12</div>-->
+<!--                    <div>+38(048)123 12 12</div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!---->
+<!--            <div class="b-social-box">-->
+<!--                <div class="b-icon-box">-->
+<!--                    <div class="b-icon-box">-->
+<!--                        <i class="b-contact-icon fa fa-skype"></i>Skype-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="b-social-info">-->
+<!--                    bydodestate-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="b-social-box">-->
+<!--                <div class="b-icon-box">-->
+<!--                    <div class="b-icon-box"><i class="b-contact-icon fa fa-volume-control-phone"></i>-->
+<!--                        Viber-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="b-social-info">-->
+<!--                    +38(048)132 12 12-->
+<!--                </div>-->
+<!--            </div>-->
+
+            <div class="b-vse">Все новострои от <?= $developer['tree_title'] ?> 2018</div>
+        </div>
+
+    </div>
+
+</footer>
+
+
+<?php $showJBlock = false;  ?>
+
+<div id="back-top" style="display: block;">
+    <a href="#top"><span></span></a>
+</div>
+
+
+<div id="blackout" <?= $showJBlock ? 'style="display:block"' : '' ?>></div>
+
+<div id="jump_block" <?= $showJBlock ? 'style="display:block;top:70px"' : '' ?>></div>
+
+
+
+
+
+
+
+<?= K_JsCss::Render('js'); ?>
+
+<!-- include Unite Gallery Theme Files -->
+
+<?= K_SEO::seoEditButton() ?>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+    <script defer src="/usr/plugin/fancybox3/jquery.fancybox.js"></script>
+</body>
+
+</html>
+
