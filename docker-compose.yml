@@ -1,0 +1,28 @@
+version: "3.3"
+
+services:
+  nginx:
+    build:
+      context: .
+      dockerfile: docker/Nginx.Dockerfile
+    ports:
+      - 8080:80
+    links:
+      - fpm
+  fpm:
+    build:
+      context: .
+      dockerfile: docker/Fpm.Dockerfile
+    volumes:
+      - ./:/var/www/novs
+  mysql:
+    image: mysql:5.7
+    restart: unless-stopped
+      tty: true
+      ports:
+        - "33061:3306"
+      environment:
+        MYSQL_DATABASE: novostroyka_db
+        MYSQL_ROOT_PASSWORD:
+        SERVICE_TAGS: dev
+        SERVICE_NAME: mysql
