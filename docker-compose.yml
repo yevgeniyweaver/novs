@@ -9,6 +9,8 @@ services:
       - 8080:80
     links:
       - fpm
+    volumes:
+      - ./:/var/www/novs
   fpm:
     build:
       context: .
@@ -18,11 +20,9 @@ services:
   mysql:
     image: mysql:5.7
     restart: unless-stopped
-      tty: true
-      ports:
-        - "33061:3306"
-      environment:
-        MYSQL_DATABASE: novostroyka_db
-        MYSQL_ROOT_PASSWORD:
-        SERVICE_TAGS: dev
-        SERVICE_NAME: mysql
+    tty: true
+    ports:
+      - "33061:3306"
+    environment:
+      MYSQL_DATABASE: novostroyka_db
+      MYSQL_ROOT_PASSWORD: 1111
