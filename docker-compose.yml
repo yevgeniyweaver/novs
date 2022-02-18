@@ -6,7 +6,7 @@ services:
       context: .
       dockerfile: docker/Nginx.Dockerfile
     ports:
-      - 8098:80
+      - 8080:80
     links:
       - fpm
     volumes:
@@ -25,4 +25,4 @@ services:
       - "33061:3306"
     environment:
       MYSQL_DATABASE: novostroyka_db
-      MYSQL_ROOT_PASSWORD:
+      MYSQL_ROOT_PASSWORD: 1111
