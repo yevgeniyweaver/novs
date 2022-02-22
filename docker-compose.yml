@@ -9,6 +9,9 @@ services:
       - 8080:80
     links:
       - fpm
+    depends_on:
+      - fpm
+      - mysql
     volumes:
       - ./:/var/www/novs
   fpm:
@@ -23,6 +26,11 @@ services:
     tty: true
     ports:
       - "33061:3306"
+    volumes:
+      - ./mysql:/var/lib/mysql
+    env_file:
+      - '.env'
     environment:
       MYSQL_DATABASE: novostroyka_db
-      MYSQL_ROOT_PASSWORD: 1111
+      MYSQL_USER: admin
+      MYSQL_ROOT_PASSWORD: admin

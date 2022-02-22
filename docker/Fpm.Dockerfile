@@ -24,4 +24,4 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 
 WORKDIR /var/www/novs
 
-RUN chmod /var/www/novs/storage/logs
+COPY --chown=www-data:www-data . .
