@@ -1,4 +1,4 @@
-version: "3.3"
+version: "3.5"
 
 services:
   nginx:
@@ -15,14 +15,40 @@ services:
     build:
       context: .
       dockerfile: docker/Fpm.Dockerfile
+    #entrypoint: sh /bin/run.sh
     volumes:
       - ./:/var/www/novs
+      - ./scripts/phpEntry.sh:/bin/run.sh
+    env_file:
+      - '.env'
+    depends_on:
+      - mysql
   mysql:
     image: mysql:5.7
     restart: unless-stopped
     tty: true
     ports:
-      - "33061:3306"
+      - "3308:3306"
     environment:
       MYSQL_DATABASE: novostroyka_db
       MYSQL_ROOT_PASSWORD: 1111
+    volumes:
+      - ./mysqldata:/docker-entrypoint-initdb.d
+      - ./docker/mysql/my.cnf:/etc/mysql/my.cnf
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: novs_pma
+    links:
+      - mysql
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+      PMA_ARBITRARY: 1
+    restart: always
+    ports:
+      - 8081:80
+
+#Volumes
+volumes:
+  mysqldata:
+    driver: local
