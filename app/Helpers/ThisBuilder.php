@@ -1,5 +1,7 @@
 <?php
 namespace App\Helpers;
+use Illuminate\Support\Facades\DB;
+
 /**
  * Created by PhpStorm.
  * User: женя

@@ -47,9 +47,9 @@ class DeveloperController extends Controller
             ->whereRaw('o.developer='.$dev['id'])->limit(4)->get();
 //        $q['builder'] = $developerId;
 //        $q['map_geo'] = true;
-//        $query = This_Object::find($q);
+//        $query = ThisObject::find($q);
 //        $this->v->paginationHtml = $query['pagination'];
-//        $this->v->mapObjects = This_Object::createMapObject($this->v->all);
+//        $this->v->mapObjects = ThisObject::createMapObject($this->v->all);
 //        $appart = json_decode($this->v->b['appart'], true);
 //        K_Crumbs::add('Ukkk',AllConfig::$protocol.'test.novostroika.od.ua');
         Crumbs::add('Главная','/');

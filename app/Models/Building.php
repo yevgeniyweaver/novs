@@ -3,18 +3,20 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Building extends Model
 {
 
     protected $table = 'obj_objects';
+    protected $primaryKey = 'id';
+    protected $fillable = [];
 
-    public function dev()
+    public function dev(): HasOne
     {
-        return $this->hasOne('App\Developer', 'type_partner_id', 'developer');
+        return $this->hasOne(Developer::class, 'type_partner_id', 'developer');
     }
-
-
     //
 //    public static function inpublic(){
 //        return static::where('pub',1)->get();

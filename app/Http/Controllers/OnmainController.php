@@ -3,118 +3,35 @@
 namespace App\Http\Controllers;
 
 use App\Http\Middleware\CheckAge;
-use Illuminate\Support\Facades\Redis;
+use App\Repository\BuildingRepo;
+use Meta;
 use Illuminate\Http\Request;
 use App;
-use App\Building;
-use This_Object;
-use DB;
-use Route;
+use App\Helpers\ThisObject;
+use Illuminate\Support\Facades\DB;
 use App\Services\MetaService;
-use App\Helpers\This_Favorites;
-//use Djmitry\Meta\Meta;
-use Djmitry\Meta\Meta;
-
-//use Torann\LaravelMetaTags\MetaTag;
-use Torann\LaravelMetaTags\Facades\MetaTag;
-
-
-trait AutoOptions {
-    protected function run() {
-        if(empty($this->speed)){
-            $this->speed = 100;
-        }
-        echo "Running at speed: {$this->speed}km/h" . PHP_EOL;
-    }
-    public function stop() {
-        if(empty($this->speed)) $this->speed = 0;
-        echo "Stopped moving!" . PHP_EOL;
-    }
-}
-
-trait AutoSpeak {
-    public function makeSound(){
-        echo $this->protectedName . PHP_EOL;
-    }
-}
-
-class Auto {
-    use AutoOptions, AutoSpeak;
-    public $model;
-    public $speed;
-    public $year;
-    protected $price;
-    private $owner;
-    public function __construct($model = 'Opel', $speed, $year)
-    {
-        $this->model = $model;
-        $this->speed = $speed;
-        $this->year = $year;
-    }
-    public function runPub(){
-        $this->run();
-    }
-    public function __destruct()
-    {
-
-    }
-    public function __unset($name)
-    {
-        vd1('remove object');
-        // TODO: Implement __unset() method.
-    }
-}
-class Audi extends Auto {
-    public function getPrice(){
-        return $this->price;
-    }
-    public function setPrice($price){
-        $this->price = $price;
-    }
-}
-//$audi = new Audi('Audi', 200, 2008);
-//
-//vd1($audi);
-//$audi->setPrice(232939239);
-//vd1($audi->getPrice());
-//vd1($audi);
-
-//$car = new Auto('Audi', 200, 2008);
-//$car->runPub();
-//$car->stop();
-//vd1($car->speed);
-
 
 
 class OnmainController extends Controller
 {
-    use AutoOptions, AutoSpeak;
-    public $public ='public';
-    public $speed;
-    protected $protectedName = 'protected';
-    private $private = 'private';
-
+    protected MetaService $metaService;
 
     public function __construct(MetaService $metaService)
     {
-
-//        $metaService
-//            ->setTitle('title', 'Все Новострои Одессы')
-//            ->setDescription('description', 'Все Новострои Одессы по цене от застройщика, предложения на любой вкус')
-//            ->setFavicon('image', asset('images/locked-logo.png'));
+//        Meta::set('title', 'Private Area');
+//        Meta::set('description', 'You shall not pass!');
+//        Meta::set('image', asset('images/locked-logo.png'));
+        $this->metaService = $metaService;
+        $this->metaService->setKey('title', 'Все Новострои Одессы');
+        $this->metaService->setKey('description', 'Все Новострои Одессы по цене от застройщика, предложения на любой вкус');
+        //$this->metaService->setKey('image', asset('img/favicon.ico'));
     }
 
 
-    public function onmain()//show __invoke $id
+    public function onmain(BuildingRepo $buildingRepo)
     {
-
-
-
         $req = new Request();
-        $find=  new FindController($req,3);
-//        echo $find->getStart();
-//        $f =88;
-//        echo 'ss: $e';
+        $find = new FindController($req,3);
         $title = "Main Page";
 
 
@@ -165,25 +82,24 @@ class OnmainController extends Controller
 //            ->get();
 //        $this->v->news = K_TreeQuery::crt("/news/")->type('news')->order(array('news' => 'new_date'))->condit(['news'=>' and type_news_new_date < NOW() '])->limitLikeSql(0, 6)->go(array('orderby' => 'DESC'));
 //        //$this->v->text = k_treequery::gOne('/texts/main/', 'node');
-        $query = This_Object::find(['map_geo' => true]);
+        $query = $buildingRepo->find(['map_geo' => true]);
+
+        $getCountByPartners = $buildingRepo->getCountByPartner();
+
         $map = $query['objects'];
-//        $roominfo = json_decode($this->v->all['appart'], true);
-//        $this->v->room = $roominfo;
-        $mapAllObjects = This_Object::createMapObject($map);
-        $url = Route::currentRouteName();
-        //vd1(Route::current()->uri());//Route::current()->uri()
-        //vd1($mapAllObjects);
+        $mapAllObjects = ThisObject::createMapObject($map);
 //        $this->v->builders = K_TreeQuery::crt('/builders/')->type('partner')->go();
 //        $objects = Object::where(['not_active'=>0])
 //            ->orderBy('new', 'desc')
 //            ->take(20)
 //            ->get();
 
-        $builders = DB::table('type_partner')->whereRaw('type_partner_turn_off!="да"')
+        $builders = DB::table('type_partner')->whereRaw('type_partner_turn_off !="да"')
             ->select('type_partner_id as id',
                 'type_partner_name as name',
                 'type_partner_turn_off as turn_off',
                 'type_partner_logo as logo')->get();
+
         $builders = $builders->toArray();
         foreach ($builders as $builder) {
                 //self::$builders[$builder->id] = $builder;
@@ -206,11 +122,11 @@ class OnmainController extends Controller
 //        $query = DB::table('users')->select('name');
 //        $users = $query->addSelect('age')->get();
         ///$news = App\Link::all();
-        return view('onmain.onmain', compact('objects','builders','news', 'mapAllObjects') );
+        return view('onmain.onmain', compact('objects','builders','news', 'mapAllObjects', 'getCountByPartners') );
     }
 
 
-    public function news(){//show __invoke $id
+    public function news(){
     //    $news = DB::table('news')->get();
         $news = DB::table('type_news as news')
             ->leftJoin('tree', 'news.type_news_id', '=', 'tree.tree_id')
@@ -233,6 +149,7 @@ class OnmainController extends Controller
             ->select('o.*', 't.type_partner_logo as dev_logo')
             ->where([ ['o.complite','=',1],['t.type_partner_turn_off','!=','да']])
             ->orderBy('o.top_sort', 'asc')->paginate(20); //->get();
+
         $meta = DB::table('tree as t')
             ->select('t.tree_meta_title as title', 't.tree_meta_description as description','t.tree_meta_keywords as keywords')
             ->where([ ['t.tree_type','=','page'],['t.tree_name','=',$url]])
@@ -284,230 +201,4 @@ class OnmainController extends Controller
         //vd1($objects);
         return view('onmain.rayon', compact('rayons_obj') );
     }
-    function prints(){
-        echo $this->public;
-        echo $this->protected;
-        echo $this->private;
-    }
 }
-
-
-
-interface IDraw {
-    public function draw($text);
-}
-
-class Circle implements IDraw {
-    public function draw($text)
-    {
-        echo $text;
-    }
-}
-
-class Square implements IDraw {
-    private $error = 404;
-    public function draw($text)
-    {
-        echo $text;
-    }
-    public function __get($name)
-    {
-        echo "Get undefined or private var: '$name'\n";
-    }
-    public function __set($name, $value)
-    {
-        echo "Set undefined or private var: '$name' to '$value'\n";
-    }
-    public function __call($name, $arguments)
-    {
-        // Note: value of $name is case sensitive.
-        echo "Call new method '$name' "
-            . implode(', ', $arguments). "\n";
-    }
-}
-//
-class Disp {
-    public function get($class)
-    {vd1($class);
-        if (class_exists(ucfirst($class))){
-
-            return new $class;
-        }
-    }
-}
-
-
-//$disp = new Disp();
-//
-//$circle = $disp->get('Circle');
-//$square = $disp->get('Square');
-//vd1($circle);
-//$circle->draw('This is Circle');
-//$square->draw('This is Square');
-
-
-//abstract class AbstractFruit {
-//    const NAME = 'orange';
-//    const COLOR = 'green';
-//    const WEIGHT = '100g';
-//
-//    public function __construct(
-//        $appLayoutsPath = AbstractFruit::NAME,
-//        $moduleLayoutsPath = AbstractFruit::COLOR,
-//        $moduleTemplatesPath = AbstractFruit::WEIGHT
-//    ) {}
-//}
-
-class Fruit {
-    public $name;
-    public $color;
-    public function __construct($name, $color) {
-        $this->name = $name;
-        $this->color = $color;
-    }
-    public static function go(){
-        echo 10;
-    }
-    public function intro() {
-        echo "The fruit is {$this->name} and the color is {$this->color}.";
-    }
-}
-
-class Strawberry extends Fruit {
-    public $weight;
-    public function intro() {
-        echo "The fruit is {$this->name}, the color is {$this->color}, and the weight is {$this->weight} gram.";
-    }
-    public function setWeight($color = 'blue')
-    {
-        parent::go();
-        $this->color = $color;
-    }
-}
-
-//$strawberry = new Strawberry('strawbery', 'red');
-//$strawberry->intro();
-//$strawberry->setWeight();
-//vd1($strawberry);
-
-
-
-
-
-
-
-class Ar {
-    public $bal;
-    public $name;
-    public function getBal(){
-        return $this->bal;
-    }
-    public static function sum($a, $b)
-    {
-        return $a + $b;
-    }
-    function __destruct() {
-        echo "The fruit is {$this->bal}.";
-    }
-}
-class Ar2 extends Ar{
-    public static function sum($a, $b)
-    {
-        return $a + $b;
-    }
-}
-//$ar2 = new Ar2();
-////$ar2->bal= 'erer';
-////echo $ar2->bal;
-//echo Ar2::sum(2, 8);
-
-
-class CallStatic
-{
-    public function __call($name, $arguments)
-    {
-        // Note: value of $name is case sensitive.
-        echo "Calling new method '$name' arguments:"
-            . implode(', ', $arguments). "\n";
-    }
-
-    /**  As of PHP 5.3.0  */
-    public static function __callStatic($name, $arguments)
-    {
-        // Note: value of $name is case sensitive.
-        echo "Calling static method '$name' "
-            . implode(', ', $arguments). "\n";
-    }
-}
-
-//$obj = new CallStatic;
-//$obj->runTest('name','age');
-//
-//CallStatic::runTest('in static context');
-
-//class Message
-//{
-//    public function formatMessage($message)
-//    {
-//        return printf("<i>%s</i>", $message);
-//    }
-//}
-//
-//class BoldMessage extends Message
-//{
-//    public function formatMessage($message)
-//    {
-//        return printf("<div style='color:red'>%s</div>", $message);
-//    }
-//}
-//$message = new Message();
-//$message->formatMessage('Hello World'); // prints '<i>Hello World</i>'
-//$message = new BoldMessage();
-//$message->formatMessage('Hello World'); // prints '<b>Hello World</b>'
-
-/*
-6_1 "SELECT employee_id,first_name,last_name,salary
-       FROM employees WHERE salary >
-	        (SELECT AVG(SALARY) FROM employees);",
-
-6_2 "SELECT b.name, office_id, person.name as fam, MAX(wage)
-FROM `person` LEFT JOIN `branch` as b ON person.office_id=b.id
-GROUP BY  b.name",
-
-6_3 "",
-
-6_4 "SELECT b.id, b.name, SUM(wage), COUNT(person.id)
-FROM `person`  LEFT JOIN branch b ON b.id=person.office_id
-GROUP BY office_id ORDER BY SUM(wage) DESC";
-*/
-
-function getNumOfUniqueCharacters($str, $n) {
-    $temp_array = [];
-    $key_array = [];
-    $count = [];
-    $chars = preg_split('//', $str, -1, PREG_SPLIT_NO_EMPTY);
-    $i = 0;
-    $u = 2;
-    function in_arrayi($needle, $haystack) {
-        return in_array(strtolower($needle), array_map('strtolower', $haystack));
-    }
-    foreach($chars as $k=>$v){
-        if(!in_arrayi($v, $key_array)){
-            $key_array[$i] = $v;
-        }else{
-            if(isset($temp_array[$v]) && in_arrayi($v, $key_array)){
-                $temp_array[$v] = $temp_array[$v]+1;
-            }else{
-                $temp_array[$v] = $u;
-            }
-            if($temp_array[$v] >=$n){
-                $count[$v] = $temp_array[$v];
-            }
-        }
-        $i++;
-    }
-    return count($count);
-}
-//vd1(getNumOfUniqueCharacters('Aa1Bbb2C3', 3)); // 0
-//vd1(getNumOfUniqueCharacters('A1222a11C1', 4)); // 2, because A and 1 both occur 2 or more times.
-//vd1(getNumOfUniqueCharacters('Alabama', 3)); // 1

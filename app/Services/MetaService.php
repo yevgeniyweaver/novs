@@ -18,7 +18,19 @@ class MetaService
     public function __construct(Meta $meta)
     {
         $this->meta = $meta;
+        //dump($this->meta);
     }
 
 
+    /**
+     * @param  string $key
+     * @param  string $value
+     *
+     * @return string
+     */
+    public function setKey(string $key, string $value): string
+    {
+        return $this->meta->set($key, $value);
+        //return $this->meta;
+    }
 }

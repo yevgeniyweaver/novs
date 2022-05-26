@@ -1,76 +1,69 @@
 <?php
 
-
 namespace App\DataObjects;
 
-
-use App\Interfaces\CustomDTO;
 use Illuminate\Http\Request;
-use Spatie\DataTransferObject\DataTransferObject;
 
-class FindData extends DataTransferObject
+class FindData
 {
 
     public ?string $type;
-
     public ?int $id;
-
     public ?int $page;
-
     public ?int $newjk_input;
-
     public ?int $complitejk_input;
-
     public ?int $price_min;
-
     public ?int $price_max;
-
     public ?string $region;
-
     public ?string $city;
+    public ?array $year;
+    public ?array $rooms;
+    public ?string $req;
 
-    public ?int $year;
-
-    public ?int $rooms;
-
-
-
-    public static function fromRequest(Request $request): self {
-        return new self([
-
-            'type' => $request->get('type'),
-
-            'id' => (int) $request->get('id'),
-
-            'page' => (int) $request->get('page'),
-
-            'newjk_input' => (int) $request->get('newjk_input'),
-
-            'complitejk_input' => (int) $request->get('complitejk_input'),
-
-            'price_min' => (int) $request->get('price_min'),
-
-            'price_max' => (int) $request->get('price_max'),
-
-            'region' => $request->get('region'),
-
-            'city' => $request->get('city'),
-
-            'year' => (int) $request->get('year'),
-
-            'rooms' => $request->get('rooms')
-
-        ]);
+    /**
+     * @param string|null $type
+     * @param int|null $id
+     * @param int|null $page
+     * @param int|null $newjk_input
+     * @param int|null $complitejk_input
+     * @param int|null $price_min
+     * @param int|null $price_max
+     * @param string|null $region
+     * @param string|null $city
+     * @param array|null $year
+     * @param array|null $rooms
+     * @param string|null $req
+     */
+    public function __construct(?string $type, ?int $id, ?int $page, ?int $newjk_input, ?int $complitejk_input, ?int $price_min, ?int $price_max, ?string $region, ?string $city, ?array $year, ?array $rooms, ?string $req)
+    {
+        $this->type = $type;
+        $this->id = $id;
+        $this->page = (int)$page;
+        $this->newjk_input = $newjk_input;
+        $this->complitejk_input = $complitejk_input;
+        $this->price_min = $price_min;
+        $this->price_max = $price_max;
+        $this->region = $region;
+        $this->city = $city;
+        $this->year = $year;
+        $this->rooms = $rooms;
+        $this->req = $req;
     }
 
-    public static function fromWebhook(array $params)
-
-    {
-
-        return new self([
-            'checkout_id' => $params['id'],
-            'completed_at' => $params['completed_at']
-        ]);
-
+    public static function fromRequest(Request $request): self {
+        return new self(
+            $request->get('type'),
+            $request->get('id'),
+            $request->get('page'),
+            $request->get('newjk_input'),
+            $request->get('complitejk_input'),
+            $request->get('price_min'),
+            $request->get('price_max'),
+            $request->get('region'),
+            $request->get('city'),
+            $request->get('year'),
+            $request->get('rooms'),
+            $request->get('req')
+        );
     }
 }

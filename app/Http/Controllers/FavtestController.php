@@ -22,7 +22,7 @@ class FavtestController extends Controller
     {
 //        $_POST['id']
         return $request->id;
-        // This_Favorites::write();
+        // ThisFavorites::write();
     }
 
     /**

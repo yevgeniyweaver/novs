@@ -14,15 +14,12 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1"/>
 
     {{--<title>@yield('title')</title>--}}
-    <title>{{ MetaTag::get('title')}}</title>
-    {!! MetaTag::tag('title') !!}
-    {!! MetaTag::tag('description') !!}
-    {!! MetaTag::tag('keywords') !!}
-    {!! MetaTag::tag('image', asset('images/default-logo.png')) !!}
-
-    <?php //use Djmitry\Meta\Meta;
-     //echo Meta::show();
-    ?>
+    <title>{!! Meta::get('title') !!}</title>
+    {!! Meta::tag('url', Request::url()); !!}
+    {!! Meta::tag('site_name', 'My site') !!}
+    {!! Meta::tag('description') !!}
+    {!! Meta::tag('keywords') !!}
+    {!! Meta::tag('image', asset('img/favicon.ico')) !!}
 
     {{--<meta name="title" content=""/>--}}
     {{--<meta name="description" content=""/>--}}
@@ -98,7 +95,7 @@
 
 <?php
 
-//print_r(\App\Helpers\This_Favorites::getCountFavourites());
+//print_r(\App\Helpers\ThisFavorites::getCountFavourites());
 
 $builders = DB::table('type_partner')->whereRaw('type_partner_turn_off!="да"')->select('*','type_partner_id as id', 'type_partner_name as name')->get();
 
@@ -107,7 +104,7 @@ $builders = DB::table('type_partner')->whereRaw('type_partner_turn_off!="да"')
 ?>
 <?php
 
-use App\Helpers\This_Favorites;
+use App\Helpers\ThisFavorites;
 $rayons = DB::table('tree as t')
 //                                ->leftJoin('type_partner as t', 'o.developer', '=', 't.type_partner_id')
     ->select('t.*')
@@ -245,8 +242,8 @@ $rayons = DB::table('tree as t')
                 </div>
                 <div class="fav-wraper">
                     <a id="fav" class="index_link" >
-                        <i class="fa main-menu-icon <?=!empty(This_Favorites::getCountFavourites())?'fa-heart':''?>"></i>
-                        <span id="count_fav"><?=This_Favorites::getCountFavourites()?></span>
+                        <i class="fa main-menu-icon <?=!empty(ThisFavorites::getCountFavourites())?'fa-heart':''?>"></i>
+                        <span id="count_fav"><?=ThisFavorites::getCountFavourites()?></span>
                     </a>
                 </div>
                 <div class="clear"></div>
@@ -353,7 +350,7 @@ $rayons = DB::table('tree as t')
     {{--<script async defer type="text/javascript" src="/usr/js/map.js"></script>--}}
     {{--<script async defer type="text/javascript" src="/usr/js/main-map.js"></script>--}}
 
-<?php //\App\Helpers\This_Favorites::init()
+<?php //\App\Helpers\ThisFavorites::init()
 
 
 

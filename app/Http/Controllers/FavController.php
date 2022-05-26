@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Helpers\This_Favorites;
+use App\Helpers\ThisFavorites;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Crumbs;
@@ -21,7 +21,7 @@ class FavController extends Controller
     {
 //        return $_POST['id'];
         //return $request->id;
-        return This_Favorites::write();
+        return ThisFavorites::write();
 
         //return $request->cookie('favourite');
 //        $value = $request->cookie('favourite');
@@ -41,12 +41,12 @@ class FavController extends Controller
 
     public function clear()
     {
-        This_Favorites::clearAll();
+        ThisFavorites::clearAll();
     }
 
     public function destroy()
     {
-        This_Favorites::destroy();
+        ThisFavorites::destroy();
     }
 
     public function index(Request $request){//show __invoke $id
@@ -117,7 +117,7 @@ class FavController extends Controller
 //        }
 //        $favourite = unserialize($_COOKIE['favourite']);
 //        if ($favourite) {
-//            $query = This_Object::find(['id' => $favourite, 'page' => (int)$_GET['page']]);
+//            $query = ThisObject::find(['id' => $favourite, 'page' => (int)$_GET['page']]);
 //            $this->v->allFavourite = $query['objects'];
 //            $this->v->paginationHtml = $query['pagination'];
 //            $this->v->isActive = true;

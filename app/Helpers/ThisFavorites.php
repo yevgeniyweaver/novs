@@ -9,7 +9,7 @@ use Illuminate\Http\Response;
 use Event;
 
 
-class This_Favorites
+class ThisFavorites
 {
 //    static public $cookies;
 
@@ -142,7 +142,7 @@ class This_Favorites
         Event::fire(new onAddFav($req));
         return self::getCountFavourites();
 //        setcookie('favourite', serialize(self::$favorites), 0, '/', config('app.url'));
-//        echo This_Favorites::getCountFavourites();
+//        echo ThisFavorites::getCountFavourites();
     }
 
     public static function getVD()
