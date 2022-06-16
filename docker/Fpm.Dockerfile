@@ -24,6 +24,9 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 # Install PHP extensions
 RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd zip mysqli pdo sockets
 RUN docker-php-ext-configure zip
+RUN pecl install -o -f redis \
+    &&  rm -rf /tmp/pear \
+    &&  docker-php-ext-enable redis
 
 # Install composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
@@ -45,7 +48,9 @@ COPY --chown=www-data:www-data . /var/www/novs
 USER www-data
 
 #RUN chmod go+w /var/www/novs/storage/logs/laravel.log
-RUN chmod -R o+w /var/www/novs/storage/
+
+RUN chmod -R o+w /var/www/novs/storage/ && php artisan config:clear
+
 #chown -R www-data:www-data /var/www/novs/storage \
 #chown -R www-data:www-data storage &&
 
