@@ -19,9 +19,6 @@ class BuildingRepo
         't.type_partner_logo as dev_logo'
     ];
 
-    /**
-     *
-     */
     public function __construct()
     {
     }
@@ -146,7 +143,7 @@ class BuildingRepo
      * @param bool $pagination
      * @return array
      */
-    public function find(array $query, bool $pagination = false): array {
+    public function find(array $query, ?bool $pagination = false): array {
 
         $building = (new Building());
         $buildingTable = $building->getTable();

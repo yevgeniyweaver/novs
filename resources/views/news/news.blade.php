@@ -31,7 +31,7 @@
                         <div class="news-content_header">
                             <a href="<?= "/" . $new->name . ".html" ?>"><?= threePointCut($new->header1,65) ?></a>
                         </div>
-                        <div class="news-content_text"><?= htmlСut(preg_replace("/<img[^>]+\>/i","",$new->content), 230) ?></div><!-- preg_replace("'<img[^>]*?>.*?>'si","",$news['content'])
+                        <div class="news-content_text"><?= htmlСut(preg_replace("/<img[^>]+\>/i","", $new->content), 230) ?></div><!-- preg_replace("'<img[^>]*?>.*?>'si","",$news['content'])
                                                                                                                                                                              preg_replace("/<img[^>]+\>/i", "", $news['content'])
                                                                                                                                                                              preg_replace("/<img[^>]+\>/i", "", $news['content'])
                                                                                                                                                  -->

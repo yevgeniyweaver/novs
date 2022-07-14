@@ -10,18 +10,21 @@ use App;
 use App\Helpers\ThisObject;
 use Illuminate\Support\Facades\DB;
 use App\Services\MetaService;
+use App\Services\NewsService;
 
 
 class OnmainController extends Controller
 {
     protected MetaService $metaService;
+    protected NewsService $newsService;
 
-    public function __construct(MetaService $metaService)
+    public function __construct(MetaService $metaService, NewsService $newsService)
     {
 //        Meta::set('title', 'Private Area');
 //        Meta::set('description', 'You shall not pass!');
 //        Meta::set('image', asset('images/locked-logo.png'));
         $this->metaService = $metaService;
+        $this->newsService = $newsService;
         $this->metaService->setKey('title', 'Все Новострои Одессы');
         $this->metaService->setKey('description', 'Все Новострои Одессы по цене от застройщика, предложения на любой вкус');
         //$this->metaService->setKey('image', asset('img/favicon.ico'));
@@ -39,13 +42,6 @@ class OnmainController extends Controller
 //        $users = App\User::where('active', 1)->get();
         //$this->gallery = k_treequery::crt('/maingal/')->types(array('image'))->go();
         //->where([ ['status', '=', '1'], ['subscribed', '<>', '1'],])
-//        $objects = App\Building::whereRaw('not_active!=1' AND 'pub=1') // ->where('votes', '>=', 100)
-//            ->orderBy('orient', 'desc')
-//            ->take(8)
-//            ->get();
-//        foreach($objects as $obj){
-//            vd1($obj->dev);
-//        }
 
         $objects = DB::table('obj_objects as o')
             ->leftJoin('type_partner as t', 'o.developer', '=', 't.type_partner_id')
@@ -54,25 +50,19 @@ class OnmainController extends Controller
             )
             ->where([ ['o.top_sort','!=',0]])
             ->orderBy('o.top_sort', 'asc')->limit(8)->get();
+        dump($objects);
 
 
-        $builders = DB::table('type_partner')->whereRaw('type_partner_turn_off!="да"')
+        $builders = DB::table('type_partner')
+            ->whereRaw('type_partner_turn_off!="да"')
             ->select('type_partner_id as id',
                 'type_partner_name as name',
                 'type_partner_turn_off as turn_off',
-                'type_partner_logo as logo')->get();
+                'type_partner_logo as logo')
+            ->get();
 
-        $news = DB::table('type_news as news')
-            ->leftJoin('tree', 'news.type_news_id', '=', 'tree.tree_id')
-            ->select('news.type_news_id as id',
-                'news.type_news_new_date as new_date',
-                'news.type_news_image as image',
-                'news.type_news_content as content',
-                'news.type_news_header1 as header1',
-                'tree.tree_name as name'
-                )
-            ->orderBy('new_date', 'desc')->limit(10)->get();
-//            ->get();
+        $news = $this->newsService->getList();
+
 //        ->simplePaginate(6);
         /* ПОЛНЫЙ JOIN */
 //        $users = DB::table('users')
@@ -138,6 +128,7 @@ class OnmainController extends Controller
                 'tree.tree_name as name'
             )//->get();
             ->paginate(10);
+
         return view('news.news', compact('news') );
     }
 

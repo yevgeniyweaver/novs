@@ -95,7 +95,7 @@
 
 <?php
 
-//print_r(\App\Helpers\ThisFavorites::getCountFavourites());
+//print_r(\App\Helpers\FavService::getCountFavourites());
 
 $builders = DB::table('type_partner')->whereRaw('type_partner_turn_off!="да"')->select('*','type_partner_id as id', 'type_partner_name as name')->get();
 
@@ -104,7 +104,7 @@ $builders = DB::table('type_partner')->whereRaw('type_partner_turn_off!="да"')
 ?>
 <?php
 
-use App\Helpers\ThisFavorites;
+use App\Services\FavService;
 $rayons = DB::table('tree as t')
 //                                ->leftJoin('type_partner as t', 'o.developer', '=', 't.type_partner_id')
     ->select('t.*')
@@ -242,8 +242,8 @@ $rayons = DB::table('tree as t')
                 </div>
                 <div class="fav-wraper">
                     <a id="fav" class="index_link" >
-                        <i class="fa main-menu-icon <?=!empty(ThisFavorites::getCountFavourites())?'fa-heart':''?>"></i>
-                        <span id="count_fav"><?=ThisFavorites::getCountFavourites()?></span>
+                        <i class="fa main-menu-icon <?=!empty(FavService::getCountFavourites())?'fa-heart':''?>"></i>
+                        <span id="count_fav"><?=FavService::getCountFavourites()?></span>
                     </a>
                 </div>
                 <div class="clear"></div>
@@ -350,7 +350,7 @@ $rayons = DB::table('tree as t')
     {{--<script async defer type="text/javascript" src="/usr/js/map.js"></script>--}}
     {{--<script async defer type="text/javascript" src="/usr/js/main-map.js"></script>--}}
 
-<?php //\App\Helpers\ThisFavorites::init()
+<?php //\App\Helpers\FavService::init()
 
 
 

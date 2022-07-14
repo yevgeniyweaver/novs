@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use DB;
-use Crumbs;
-use Torann\LaravelMetaTags\Facades\MetaTag;
+use Illuminate\Support\Facades\DB;
+use App\Helpers\Crumbs;
 
 trait Price {
     public function makePrice(){
@@ -24,7 +23,7 @@ class ObjectController extends Controller
     }
 
 
-    public function index($developer,$jk ){//show __invoke $id
+    public function index($developer, $jk){//show __invoke $id
 
 //        $input = file_get_contents("http://kooperativ-prostranstvo.novostroika.od.ua/zhk-prostranstvonaradostnoy.html");
        // vd1( $GLOBALS);
@@ -37,7 +36,7 @@ class ObjectController extends Controller
             ->select(
                 'o.*', 't.type_partner_logo as dev_logo'
             )
-            ->where([ ['o.url','=',$jk_url]])
+            ->where([ ['o.url','=', $jk_url]])
             ->orderBy('o.top_sort', 'asc')->first();
 
         $e = json_decode(json_encode($object), true);//$builder
@@ -268,8 +267,8 @@ class ObjectController extends Controller
         $title = "{$e['orient']} &mdash; Продажа квартир  | {$dev['name']}";
         $description = "Продажа квартир в {$e['orient']} по цене от застройщика ➜ от {$e['price']} {$e['price_cur_word']}/м2 ★★★ Без комиссии ★★★ Без переплат ★★★ Отдел продаж новостроя";
 
-        MetaTag::set('title', $title);
-        MetaTag::set('description', $description);
+//        MetaTag::set('title', $title);
+//        MetaTag::set('description', $description);
 
         //        K_SEO::$description = "Продажа квартир в {$jk['orient']} по цене от застройщика ➜ от {$jk['price']} {$e['price_cur_word']}/м2 ★★★ Без комиссии ★★★ Без переплат ★★★ Отдел продаж новостроя";
 //        K_SEO::$title = "{$jk['orient']} &mdash; Продажа квартир  | {$developer['name']}";

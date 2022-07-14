@@ -41,8 +41,8 @@ class FindData
         $this->page = (int)$page;
         $this->newjk_input = $newjk_input;
         $this->complitejk_input = $complitejk_input;
-        $this->price_min = $price_min;
-        $this->price_max = $price_max;
+        $this->price_min = (int)$price_min;
+        $this->price_max = (int)$price_max;
         $this->region = $region;
         $this->city = $city;
         $this->year = $year;

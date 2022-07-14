@@ -35,7 +35,8 @@ if (! function_exists('vd1')) {
     function vd1(...$args)
     {
         foreach ($args as $x) {
-            (new Dumper)->dump($x);
+            //(new Dumper)->dump($x);
+            dump($x);
         }
 
         die(1);

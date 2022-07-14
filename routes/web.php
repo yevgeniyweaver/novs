@@ -73,14 +73,8 @@ Route::get('/api/test', 'AjaxController@test');
 
 Route::get('/news', 'NewsController@news');
 Route::get('/news/{id}', 'NewsController@show')->where('id','[a-z]+');
-Route::get('/sdanie', array(
-    'as' => 'sdanie',
-    'uses' => 'OnmainController@sdanie'
-));
-Route::get('/novie', array(
-    'as' => 'novie',
-    'uses' => 'OnmainController@novie'
-));
+Route::get('/sdanie', array('as' => 'sdanie', 'uses' => 'OnmainController@sdanie'));
+Route::get('/novie', array('as' => 'novie', 'uses' => 'OnmainController@novie'));
 Route::get('/home', function () {
     $minutes = 60;
     $cookie = Cookie('home', 'home323', $minutes);
@@ -88,22 +82,14 @@ Route::get('/home', function () {
         ->header('Content-Type', 'text/plain')
         ->cookie($cookie);
 });
-Route::get('/find', array(
-    'as' => 'find',
-    'uses' => 'FindController@index'
-));
+Route::get('/find', array('as' => 'find', 'uses' => 'FindController@index'));
 
-Route::get('/favourites', array(
-    'as' => 'fav',
-    'uses' => 'FavController@index'
-));
+Route::get('/favourites', array('as' => 'fav', 'uses' => 'FavController@index'));
 //Route::resource('/fav','FavController',['only' => ['add','clear','destroy']]);
-Route::post('/fav/add',[
-    'as' => 'addfav',
-    'uses' => 'FavController@add'
-]);
+Route::post('/fav/add',['as' => 'addfav', 'uses' => 'FavController@add']);
 Route::post('/fav/clear','FavController@clear' )->name('clearfav');
 Route::post('/fav/destroy','FavController@destroy' )->name('destroyfav');
+
 Route::post('/ajax/getobjinfo','AjaxController@clear' )->name('getObjInfo');
 //Route::get('/favtest', 'FavtestController@add');
 //Route::resource('/favtest', 'FavtestController',['only' => ['index', 'add','store', 'show', 'destroy']]);
@@ -122,6 +108,18 @@ Route::get('/{developer}',['uses'=>'DeveloperController@index'] )->middleware('r
 
 Route::get('products/', 'CategoryController@products');//CategoryController@products  ['uses' => 'CategoryController@products', 'as' => 'name']
 Route::get('products/{id}', ['uses' => 'CategoryController@category', 'as' => 'name']);
+
+
+
+
+
+
+
+
+
+
+
+
 
 //Route::get('/sdanie','DeveloperController@index' )->name('developer');
 
@@ -189,27 +187,6 @@ Route::get('products/{id}', ['uses' => 'CategoryController@category', 'as' => 'n
 //    ));
 //});
 
-//Route::get('/news', function () {
-//    //return view('user.profile')->with(['id' => 'James','user'=>'eee']);
-////    $news = DB::table('news')->get();
-////    $news = App\Link::all();
-//    $news = App\Link::inpublic();
-//    return view('news.news', compact('news') );
-//});
-//Route::get('/news/{id}', function ($id) {
-//    //return view('user.profile')->with(['id' => 'James','user'=>'eee']);
-//    //$link = DB::table('news')->find($id);
-//    $link = App\Link::find($id);
-//    return view('news.show', compact('link') );
-//});
-
-
-//Route::get('user/{id}', function ($id) {
-//    //return 'User '.$id;
-//    return action('UserController@show');
-//}); //->where('id', '[0-9]+')
-
-//Route::get('user/{id}', 'UserController@profile')->where('id','[0-9]+');;
 
 
 //Route::get('user/{id}/profile', function ($id) {
@@ -221,9 +198,6 @@ Route::get('products/{id}', ['uses' => 'CategoryController@category', 'as' => 'n
 //})->where(['id' => '[0-9]+', 'name' => '[a-z]+']);
 
 //Route::get('user/{id}', function ($id) {
-//   //return route('profile');
-//    //Request $request,
-//    return action('UserController@profile');
 //    //return view('resources/views/user/profile');
 //});
 
@@ -239,17 +213,6 @@ Route::get('products/{id}', ['uses' => 'CategoryController@category', 'as' => 'n
 //Route :: get ('emp/{id}', function ($id) {
 //    echo 'Emp '.$id;
 //});
-Route :: get ('emp/{desig?}', function ($desig = null) {// Необязательный параметр
-    echo $desig;
-});
-Route::match(['get', 'post'], 'emp/{id}', function ($id) {
-    echo 'Emp '.$id;
-});
-Route::get('posts/{post}/comments/{comment}/{text}', function ($postId, $commentId, $text) {
-    //
-    return "Post №".$postId." comments is ".$commentId." text is ".$text;
-});
-
 
 //Route::namespace('Admin')->group(function () {
 //    // Controllers Within The "App\Http\Controllers\Admin" Namespace

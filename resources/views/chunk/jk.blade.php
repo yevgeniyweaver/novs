@@ -17,7 +17,7 @@ $no_shadow=false;
         </div>
         <? if (!$no_shadow): ?>
         <div id="red-click" class="red-heart img-circle" data-id="<?= $rec->id ?>" >
-            <i class="fa fa-heart <?=\App\Helpers\ThisFavorites::isFavorite($rec->id)?'red-heart-active':''?>"></i>
+            <i class="fa fa-heart <?=\App\Services\FavService::isFavorite($rec->id)?'red-heart-active':''?>"></i>
         </div>
         <?php endif; ?>
         <div class="b-complex-logo-block">

@@ -1,50 +1,50 @@
 <?php
 
-namespace App\Helpers;
+
+namespace App\Services;
 //use Illuminate\Cookie;
 use App\Events\onAddFav;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Event;
+use Illuminate\Support\Facades\Event;
 
 
-class ThisFavorites
+class FavService
 {
-//    static public $cookies;
-
-    static public $favorites;
+    static public $cookies;
+    static public array $favorites;
 
     public static function init()
     {
-
         if (empty(self::$favorites)) {
-           //$cookie = self::unserializeCookies();
+            //$cookie = self::unserializeCookies();
             $cookie = json_decode(Cookie::get('favourite'));
             self::$favorites = $cookie;
         }
         //return Cookie::get('favourite');
     }
 
-    public static function isFavorite($id)
+    public static function isFavorite(string $id)
     {
-        if(empty(self::$favorites) || self::$favorites ==null ){
+        if (empty(self::$favorites) || self::$favorites == null) {
             $cookie = json_decode(Cookie::get('favourite'));
-            self::$favorites = $cookie;
-            if(!empty($cookie) && $cookie !=null){
-                return in_array($id, self::$favorites) ? true : false;
-            }
-            return false;
 
-        }else{
+            if (empty($cookie) || $cookie == null) {
+                return false;
+            }
+
+            self::$favorites = $cookie;
+
+            return in_array($id, self::$favorites) ? true : false;
+
+        } else {
             return in_array($id, self::$favorites) ? true : false;
         }
-       //return self::$favorites;
-
     }
 
 
-    public static function set($value)
+    public static function set(string $value)
     {
         if ($_COOKIE['favourite']) {
             self::$favorites = self::unserializeCookies();
@@ -57,59 +57,44 @@ class ThisFavorites
         self::setCookies();
     }
 
-    public static function write()
+    public static function write(): void
     {
         //self::unserializeCookies();
-//        $val = Cookie::get('favourite');
         //Cookie::queue(Cookie::forget('favourite'));
         if (Cookie::has('favourite')) {
-            $fav = Cookie::get('favourite');
-            $sa = json_decode(Cookie::get('favourite'));
-            self::$favorites = $sa;
+            self::$favorites = json_decode(Cookie::get('favourite'));
 //            cookie->queue('name', json_encode($_POST), 84600);
             if (!in_array($_POST['id'], self::$favorites)) {
                 array_push(self::$favorites, $_POST['id']);
             }
         } else {
-            $sa = [$_POST['id']];
-            self::$favorites = [$_POST['id']];//$_POST['id']
+            self::$favorites = [$_POST['id']];
         }
-        return self::setCookies();
-        //return json_decode(Cookie::get('favourite'));
-      // Cookie::get('favourite');
-//        if (isset($_COOKIE['favourite'])) {
-//            self::$favorites = self::unserializeCookies();
-//            if (!in_array($_POST['id'], self::$favorites)) {
-//                array_push(self::$favorites, $_POST['id']);
-//            }
-//        } else {
-//            self::$favorites = [2];//$_POST['id']
-//        }
-//        self::setCookies();
-//        return self::$favorites;
+
+        self::setCookies();
     }
 
     public static function unserializeCookies()
     {
-        $minutes=10;
+        $minutes = 10;
         $fav = '111111111118';
 //        $value = $request->cookie('name');
         $cookie = Cookie('favourite', $fav, $minutes);
-       // $value = Cookie::get('favourite');
+        // $value = Cookie::get('favourite');
         $response = new response();
-       return $response->withCookie($cookie);//$cookie->getName();
+        return $response->withCookie($cookie);//$cookie->getName();
         //return $request->id;
-       //return response()->cookie($cookie);
+        //return response()->cookie($cookie);
         //return unserialize($_COOKIE['favourite']);
     }
 
     public static function getCountFavourites()
     {
-        if (!empty(self::$favorites) && self::$favorites !=null) {
+        if (!empty(self::$favorites) && self::$favorites != null) {
             return count(self::$favorites);
-        }else{
+        } else {
             $cookie = json_decode(Cookie::get('favourite'));
-            if(!empty($cookie) && $cookie !=null){
+            if (!empty($cookie) && $cookie != null) {
                 return count($cookie);
             }
         }
@@ -120,29 +105,28 @@ class ThisFavorites
         setcookie('favourite', null, 0, '/', config('app.url'));
     }
 
-    public static function destroy()
+    public static function destroy(): void
     {
         $id = $_POST['id'];
         $cookies = self::unserializeCookies();
         foreach ($cookies as $key => $value) {
-            if ($id == $value)
+            if ($id == $value) {
                 unset($cookies[$key]);
+            }
         }
         self::$favorites = $cookies;
         self::setCookies();
     }
 
-    private static function setCookies()
+    private static function setCookies(): int
     {
         $minutes = 350;
         Cookie::queue(Cookie::make('favourite', json_encode(self::$favorites), $minutes));
-       // Cookie::queue(['favourite', json_encode(self::$favorites), 10]);
-        $req = new Request();
+        // Cookie::queue(['favourite', json_encode(self::$favorites), 10]);
 //        return Cookie::get('favourite');
-        Event::fire(new onAddFav($req));
+       // Event::fire(new onAddFav($req));
         return self::getCountFavourites();
 //        setcookie('favourite', serialize(self::$favorites), 0, '/', config('app.url'));
-//        echo FavService::getCountFavourites();
     }
 
     public static function getVD()
