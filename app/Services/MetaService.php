@@ -18,7 +18,6 @@ class MetaService
     public function __construct(Meta $meta)
     {
         $this->meta = $meta;
-        //dump($this->meta);
     }
 
 
@@ -31,6 +30,5 @@ class MetaService
     public function setKey(string $key, string $value): string
     {
         return $this->meta->set($key, $value);
-        //return $this->meta;
     }
 }

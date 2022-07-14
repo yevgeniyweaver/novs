@@ -1,9 +1,9 @@
 <html>
 <body>
-<h1>Hello, </h1>
+<h1>{{$new->title}}</h1>
 <div class="">
     <div class="">
-        {{$link->title}}
+        {{$new->content}}
     </div>
 </div>
 </body>

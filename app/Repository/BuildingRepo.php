@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Repository;
-use App\DataObjects\FindData;
+use App\DTO\FindData;
 use App\Models\Building;
 use Illuminate\Support\Facades\DB;
 
@@ -247,7 +247,7 @@ class BuildingRepo
     private function getQueryParams(FindData $findDTO): array
     {
         $query = [];
-        dump($findDTO);
+
         if ($findDTO->newjk_input == 1) {
             $query['newjk_input'] = 1;//$query['jk_is_new']
         }

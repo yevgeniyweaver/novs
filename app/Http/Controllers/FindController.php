@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\DataObjects\FindData;
+use App\DTO\FindData;
 use App\Repository\BuildingRepo;
 
 /**
@@ -42,7 +42,7 @@ class FindController extends Controller
 
     /**
      * @param BuildingRepo $buildingRepo
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return mixed
      */
     public function index(BuildingRepo $buildingRepo)
     {

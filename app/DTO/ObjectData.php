@@ -1,5 +1,5 @@
 <?php
-namespace App\DataObjects;
+namespace App\DTO;
 
 use Carbon\Carbon;
 

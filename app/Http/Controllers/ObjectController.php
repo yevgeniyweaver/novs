@@ -8,28 +8,27 @@ use App\Helpers\Crumbs;
 
 trait Price {
     public function makePrice(){
-        //echo $this->price;
         $input = file_get_contents("http://kooperativ-prostranstvo.novostroika.od.ua/zhk-prostranstvonaradostnoy.html");
         return $input;
     }
 }
+
 class ObjectController extends Controller
 {
     use Price;
-    protected $price;
+    protected int $price;
+
     public function __construct()
     {
         $this->price = 1000;
     }
 
 
-    public function index($developer, $jk){//show __invoke $id
+    public function index($developer, $jk){
 
 //        $input = file_get_contents("http://kooperativ-prostranstvo.novostroika.od.ua/zhk-prostranstvonaradostnoy.html");
-       // vd1( $GLOBALS);
 
-        $jk_url = $jk.'.html';
-
+        $jk_url = $jk . '.html';
 
         $object = DB::table('obj_objects as o')
             ->leftJoin('type_partner as t', 'o.developer', '=', 't.type_partner_id')
@@ -37,20 +36,23 @@ class ObjectController extends Controller
                 'o.*', 't.type_partner_logo as dev_logo'
             )
             ->where([ ['o.url','=', $jk_url]])
-            ->orderBy('o.top_sort', 'asc')->first();
+            ->orderBy('o.top_sort', 'asc')
+            ->first();
 
-        $e = json_decode(json_encode($object), true);//$builder
+        $e = json_decode(json_encode($object), true);
 
         $builder = DB::table('type_partner as d')
             ->leftJoin('tree as t', 'd.type_partner_id', '=', 't.tree_id')
-            ->whereRaw('d.type_partner_turn_off!="да" AND d.type_partner_id='.$object->developer)
+            ->whereRaw('d.type_partner_turn_off!="да" AND d.type_partner_id=' . $object->developer)
             ->select('d.type_partner_id as id',
                 'd.type_partner_name as name',
                 'd.type_partner_color as color',
                 'd.type_partner_turn_off as turn_off',
                 't.tree_name',
-                'd.type_partner_logo as logo')->first();
-        $dev = json_decode(json_encode($builder), true);//$builder
+                'd.type_partner_logo as logo')
+            ->first();
+
+        $dev = json_decode(json_encode($builder), true);
 
         if($e['price_cur']==2){ $e['price_cur_word'] = 'грн'; }else{ $e['price_cur_word'] = '$'; }
 
@@ -60,8 +62,6 @@ class ObjectController extends Controller
         $point['map_lat'] = $e['map_lat'];
         $point['map_lng'] = $e['map_lng'];
         $mapPoint = json_encode([$point]);
-        //vd1($mapPoint);
-        //vd1($developer);
 
 //        $builders = DB::table('type_partner as d')
 //            ->leftJoin('tree as t', 'd.type_partner_id', '=', 't.tree_id')
@@ -78,17 +78,12 @@ class ObjectController extends Controller
 //        if($this->v->jk['date_price_update'] !='0000-00-00 00:00:00'){
 //            $this->v->updatePrice = K_Date::dateParse($this->v->jk['date_price_update']);
 //            $this->v->updatePrice = $this->v->updatePrice['d'].' '.K_Date::ruMonthWord($this->v->updatePrice['m']);
-////            vd1($this->v->updatePrice['d'].' '.K_Date::ruMonthWord($this->v->updatePrice['m']));
+//            vd1($this->v->updatePrice['d'].' '.K_Date::ruMonthWord($this->v->updatePrice['m']));
 //        }
-//
-//
+
         $jk_plans = json_decode($e['plans'],true);
 
-//        if(strripos($jk_plans[0]['price_all'], 'грн')){
-//            $e['priceCurrency'] = 'UAH';
-//        }else{
-//            $e['priceCurrency'] = 'USD';
-//        }
+        $e['priceCurrency'] = strripos($jk_plans[0]['price_all'], 'грн') ? 'UAH' : 'USD';
 
         if(!empty($jk_plans)){
             $e['lowPlan'] = preg_replace('~\D+~', '', $jk_plans[0]['price_all']);
@@ -259,6 +254,7 @@ class ObjectController extends Controller
         //вытягиваем планировки из массива всего объекта//
 
         //$plansArray = array_filter(explode(",",$e['plans_nums']));
+
         $street = $e['orient'];
         $builder = 'Новострои от '.$dev['name'];//$developer['name']
         Crumbs::add($builder, '/'.$developer);
@@ -276,24 +272,4 @@ class ObjectController extends Controller
 
         return view('object.object', compact('object','dev','jk_plans','jk_slides','jk_build_status','action','actionCount','recomended','object_desc','mapPoint'));
     }
-
-
-    public function show($jk){//show __invoke $id
-        vd1($jk);
-        //    $news = DB::table('news')->get();
-//        $news = DB::table('type_news as news')
-//            ->leftJoin('tree', 'news.type_news_id', '=', 'tree.tree_id')
-//            ->select('news.type_news_id as id',
-//                'news.type_news_new_date as new_date',
-//                'news.type_news_image as image',
-//                'news.type_news_content as content',
-//                'news.type_news_header1 as header1',
-//                'tree.tree_name as name'
-//            )
-//            ->paginate(10);
-        return view('object.object' );
-    }
 }
-
-//$object = new ObjectController();
-//$object->makePrice();  // из типажа Movement
