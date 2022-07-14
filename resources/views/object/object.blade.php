@@ -8,7 +8,7 @@
             <div class="b-nav-tabs">
                 <i class="b-nav-icon fa fa-home"></i>
                 <div class="b-nav-home">
-                    <?= crumbs::render() ?>
+                    <?= \App\Helpers\Crumbs::render() ?>
                 </div>
             </div>
             <div class="clear"></div>

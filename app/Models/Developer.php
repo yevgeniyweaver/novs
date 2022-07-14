@@ -6,6 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Developer extends Model
 {
-    //
     protected $table = 'type_partner';
 }

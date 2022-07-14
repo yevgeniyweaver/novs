@@ -1,9 +1,10 @@
 <?php
 /* @var $no_shadow boolean */
 //vd1(K_Registry::get('rayon')['tree_name']);
+use App\Helpers\ThisObject;
 $h3experiment = array('centr','cheremushki');
 $no_shadow=false;
-//print_r( This_object::getLink($rec));
+//print_r( Thisobject::getLink($rec));
 
 ?>
 <div class="b-complex-item object-id" data-id="<?= $rec->id ?>">
@@ -12,11 +13,11 @@ $no_shadow=false;
     <div class="b-complex-item-img" style="">
 
         <div class="b-complex-item-lazy">
-            <img class="lazyload" src="<?=This_Object::getFirstImgPath($rec)?>" alt="<?= $rec->orient ?> фото"/>
+            <img class="lazyload" src="<?=ThisObject::getFirstImgPath($rec)?>" alt="<?= $rec->orient ?> фото"/>
         </div>
         <? if (!$no_shadow): ?>
         <div id="red-click" class="red-heart img-circle" data-id="<?= $rec->id ?>" >
-            <i class="fa fa-heart <?=\App\Helpers\This_Favorites::isFavorite($rec->id)?'red-heart-active':''?>"></i>
+            <i class="fa fa-heart <?=\App\Services\FavService::isFavorite($rec->id)?'red-heart-active':''?>"></i>
         </div>
         <?php endif; ?>
         <div class="b-complex-logo-block">
@@ -40,7 +41,7 @@ $no_shadow=false;
                 <?php endif; ?>
             </div>
 
-            <h3><a href="<?=This_object::getLink($rec)?>" target="_blank" class="b-complex-name"> <?= $rec->orient ?><br></a></h3>
+            <h3><a href="<?=ThisObject::getLink($rec)?>" target="_blank" class="b-complex-name"> <?= $rec->orient ?><br></a></h3>
 
             <div class="b-complex-location"> <?= $rec->region ?> р-н <br></div>
 

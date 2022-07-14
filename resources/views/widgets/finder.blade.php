@@ -1,15 +1,7 @@
 <?php
 use Illuminate\Support\Facades\Request;
-use Illuminate\Support\Facades\Input;
-$rooms = array('Сданные', 2018, 2019, 2020, '2021+');
-foreach ($rooms as $key =>$value){
-    //vd1($key);
-    //vd1((Input::has('year') && in_array($value, Input::get('year'))) ? "selected='selected'" : "");
-}
 
-//vd1(in_array(2018,Input::get('year')));
-Input::get('rooms',[]);
-//vd1(Input::get('rooms'));
+$rooms = array('Сданные', 2018, 2019, 2020, '2021+');
 ?>
 <div class="finder-open-bg">
     <div id="finder-open-btn" class="finder-open-btn" onclick="">
@@ -29,8 +21,8 @@ Input::get('rooms',[]);
             <form action="" id="main-find-inner" method="get">
                 <div class="find-form-box">
                     <script type="text/javascript">
-                        var newjk = <?= Input::has('newjk_input') ? 1 : 0 ?>;
-                        var complitejk = <?= Input::has('complitejk_input') ? 1 : 0 ?>;
+                        var newjk = <?= Request::input('newjk_input') ? 1 : 0 ?>;
+                        var complitejk = <?= Request::input('complitejk_input') ? 1 : 0 ?>;
                     </script>
 
                     <div class="find-page-cont-one">
@@ -38,14 +30,14 @@ Input::get('rooms',[]);
                         <div class="find-name-input">
                             <div class="find-name-input-box">
                                 <input id="find-req" name="req" type="hidden"
-                                       value="{{ Input::get('req') or '' }} ">
+                                       value="{{ Request::input('req') or '' }} ">
                                 <input id="find-type" name="type" type="hidden"
-                                       value="{{ Input::get('type') or '' }}">
-                                <input id="find-id" name="id" type="hidden" value="{{ Input::get('id') or '' }}">
+                                       value="{{ Request::input('type') or '' }}">
+                                <input id="find-id" name="id" type="hidden" value="{{ Request::input('id') or '' }}">
 
                                 <input id="find-name-input" class="m-inpt bd-params" name="query" type="text"
                                        placeholder="Название ЖК, район города, улица или застройщик"
-                                       value="{{ Input::has('query')? htmlspecialchars(Input::get('query')) : '' }}"
+                                       value="{{ Request::input('query')? htmlspecialchars(Request::input('query')) : '' }}"
                                        autocomplete="off">
                                 <div class="find-name-dropdown-block">
 
@@ -59,12 +51,12 @@ Input::get('rooms',[]);
 
                         <div  class="find-page-city">
                             <input id="find-city" name="city" type="hidden"
-                                   value="<?= Input::has('city')? Input::get('city') :'' ?>">
+                                   value="<?= Request::input('city') ?? '' ?>">
                             <div class="find-page-city-chbx bd-params">
                                 <span class="city_span">
 
-                                    @if (Input::has('city'))
-                                        <?= Input::get('city') ?>
+                                    @if (Request::input('city'))
+                                        <?= Request::input('city') ?>
                                     @else
                                         Выберите город
                                     @endif
@@ -147,11 +139,11 @@ Input::get('rooms',[]);
 
                         <div  class="find-page-rayon">
                             <input id="find-region" name="region" type="hidden"
-                                   value="<?= (Input::has('region')) ? Input::get('region') : '' ?>">
-                            <div class="find-page-rayon-chbx bd-params <?=Input::has('region')? '' : 'not_active'?>">
+                                   value="<?= (Request::input('region')) ?? '' ?>">
+                            <div class="find-page-rayon-chbx bd-params <?= Request::input('region') ? '' : 'not_active'?>">
                                 <span class="rayon_span">
-                                    @if (Request::has('region'))
-                                        <?= Input::get('region') ?>
+                                    @if (Request::input('region'))
+                                        <?= Request::input('region') ?>
                                     @else
                                         Выберите район
                                     @endif
@@ -194,7 +186,7 @@ Input::get('rooms',[]);
 
                                 foreach ($rooms as $key =>$value){
                                     ?>
-                                    <option <?= (Input::has('rooms') && in_array($key, Input::get('rooms'))) ? "selected='selected'" : ""; ?> value="<?= $key ?>">
+                                    <option <?= (Request::input('rooms') && in_array($key, Request::input('rooms'))) ? "selected='selected'" : ""; ?> value="<?= $key ?>">
                                         <?= $value ?>
                                     </option>
                                 <?php } ?>
@@ -210,7 +202,7 @@ Input::get('rooms',[]);
                         <div class="find-page-price-box">
                             <div class="find-page-price-f">
                                 <input  class="f-p-price-input" name="price_min" type="text" placeholder="Цена от"
-                                        value="{{ Input::has('price_min')? Input::get('price_min'): '' }}">
+                                        value="{{ Request::input('price_min') ?? '' }}">
                             </div>
 
                             <div class="find-page-hr-box">
@@ -220,7 +212,7 @@ Input::get('rooms',[]);
 
                             <div class="find-page-price-l">
                                 <input  class="f-p-price-input" name="price_max" type="text" placeholder="Цена до"
-                                        value="{{ Input::has('price_max')? Input::get('price_max'): '' }}">
+                                        value="{{ Request::input('price_max') ?? '' }}">
                             </div>
                         </div>
 
@@ -239,7 +231,7 @@ Input::get('rooms',[]);
                                 $rooms = array('Сданные', 2018, 2019, 2020, '2021+');
 //                                print_r(in_array(2018, Input::get('year')));
                                 foreach ($rooms as $value) : ?>
-                                    <option <?= (Input::has('year') && in_array($value, Input::get('year'))) ? "selected='selected'" : ""; ?> value="<?= $value ?>">
+                                    <option <?= (Request::input('year') && in_array($value, Request::input('year'))) ? "selected='selected'" : ""; ?> value="<?= $value ?>">
                                         <?= $value ?>
                                     </option>
                                 <?php endforeach; ?>
@@ -251,11 +243,11 @@ Input::get('rooms',[]);
                         <div class="find-page-state">
                             <div class="find-page-state-box">
                                 <div class="find-state-new-checkbox find_state_check">
-                                    <input id="state_new" class="find-state" name="newjk_input" {{ Input::has('newjk_input') ? 'checked="checked"' : '' }}  type="checkbox"  value="<?=  Input::has('newjk_input') ? 1 : 0 ?>">
+                                    <input id="state_new" class="find-state" name="newjk_input" {{ Request::input('newjk_input') ? 'checked="checked"' : '' }}  type="checkbox"  value="<?=  Request::input('newjk_input') ? 1 : 0 ?>">
                                     <label for="state_new">Новый</label>
                                 </div>
                                 <div class="find-state-old-checkbox find_state_check">
-                                    <input id="state_old" class="find-state" name="complitejk_input" {{ Input::has('complitejk_input') ? 'checked="checked"' : '' }}  type="checkbox" value="<?= Input::has('complitejk_input') ? 1 : 0 ?>">
+                                    <input id="state_old" class="find-state" name="complitejk_input" {{ Request::input('complitejk_input') ? 'checked="checked"' : '' }}  type="checkbox" value="<?= Request::input('complitejk_input') ? 1 : 0 ?>">
                                     <label for="state_old">Сдан</label>
                                 </div>
                             </div>

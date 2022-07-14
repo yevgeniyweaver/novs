@@ -4,21 +4,21 @@
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Support\Debug\Dumper;
 
-if (! function_exists('putJSON')) {
+if (!function_exists('putJSON')) {
     function putJSON($data)
     {
-        $this->disableLayout = true;
-        $this->rendered = true;
-        die(json_encode($data,JSON_UNESCAPED_UNICODE));
+//        $this->disableLayout = true;
+//        $this->rendered = true;
+//        die(json_encode($data,JSON_UNESCAPED_UNICODE));
     }
 }
 
-if (! function_exists('putAjax')) {
+if (!function_exists('putAjax')) {
     function putAjax($data)
     {
-        $this->disableLayout = true;
-        $this->rendered = true;
-        die($data);
+//        $this->disableLayout = true;
+//        $this->rendered = true;
+//        die($data);
     }
 }
 
@@ -35,13 +35,14 @@ if (! function_exists('vd1')) {
     function vd1(...$args)
     {
         foreach ($args as $x) {
-            (new Dumper)->dump($x);
+            //(new Dumper)->dump($x);
+            dump($x);
         }
 
         die(1);
     }
 }
-if (! function_exists('vd')) {
+if (!function_exists('vd')) {
 
     function vd($var = false, $showHtml = false, $showFrom = true)
     {
@@ -54,14 +55,14 @@ if (! function_exists('vd')) {
     }
 }
 
-if (! function_exists('e')) {
+if (!function_exists('e')) {
     /**
      * Escape HTML special characters in a string.
      *
      * @param  \Illuminate\Contracts\Support\Htmlable|string  $value
      * @return string
      */
-    function e($value)
+    function eMy($value)
     {
         if ($value instanceof Htmlable) {
             return $value->toHtml();
@@ -71,7 +72,7 @@ if (! function_exists('e')) {
     }
 }
 
-if (! function_exists('htmlСut')) {
+if (!function_exists('htmlСut')) {
 
     function htmlСut($html, $size)
     {
@@ -95,7 +96,7 @@ if (! function_exists('htmlСut')) {
     }
 }
 
-if (! function_exists('threePointCut')) {
+if (!function_exists('threePointCut')) {
 
     function threePointCut($html, $size)
     {
@@ -112,7 +113,7 @@ if (! function_exists('threePointCut')) {
     }
 }
 
-if (! function_exists('stripWords')) {
+if (!function_exists('stripWords')) {
     function stripWords($string, $count)
     {
         $splice_pos = null;
@@ -137,7 +138,7 @@ if (! function_exists('stripWords')) {
     }
 }
 
-if (! function_exists('closeTags')) {
+if (!function_exists('closeTags')) {
     function closeTags($html)
     {
         $not_close = array('br', 'img');

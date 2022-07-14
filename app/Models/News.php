@@ -8,8 +8,8 @@ class News extends Model
 {
 
     protected $table = 'type_news';
-    //
-//    public static function inpublic(){
-//        return static::where('pub',1)->get();
-//    }
+
+    public static function inpublic(){
+        return static::where('pub', 1)->get();
+    }
 }

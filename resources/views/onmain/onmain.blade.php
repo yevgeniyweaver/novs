@@ -85,7 +85,7 @@
                 <div class="company-box">
                     <div class="company-title">Строительные компании</div>
                     <?php foreach ($builders as $b) : ?>
-                    <?php if($b->turn_off!="да"){?>
+                    <?php if ($b->turn_off != "да") {?>
                     <a class="company-item"
                        href="//<?= $b->name . '.' ?>">
                         <div class="gefest-banner">

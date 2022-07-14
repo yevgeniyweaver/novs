@@ -4,6 +4,7 @@
 namespace App\Services;
 
 use App\Interfaces\MetaInterface;
+use Eusonlito\LaravelMeta\Meta;
 
 class MetaService
 {
@@ -14,10 +15,20 @@ class MetaService
      */
     public $meta;
 
-    public function __construct(MetaInterface $meta)
+    public function __construct(Meta $meta)
     {
         $this->meta = $meta;
     }
 
 
+    /**
+     * @param  string $key
+     * @param  string $value
+     *
+     * @return string
+     */
+    public function setKey(string $key, string $value): string
+    {
+        return $this->meta->set($key, $value);
+    }
 }

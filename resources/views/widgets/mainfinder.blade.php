@@ -1,11 +1,5 @@
-<?php use Illuminate\Support\Facades\Request;
-use Illuminate\Support\Facades\Input;
-
-//vd1(Input::get('rooms'));
-
-Input::get('rooms',[]);
-
-//vd1(Input::get('rooms'));
+<?php
+use Illuminate\Support\Facades\Request;
 ?>
 
 
@@ -45,7 +39,7 @@ Input::get('rooms',[]);
                                     <input id="find-id" name="id" type="hidden" value="">
                                     <input itemprop="query-input" id="find-name-input" class="m-inpt bd-params" name="query" type="text"
                                            placeholder="Название ЖК, или компании"
-                                           value="{{ Input::get('req') or '' }}   " autocomplete="off">
+                                           value="{{ Request::input('req') or '' }}   " autocomplete="off">
                                     <div class="find-name-dropdown-block"></div>
                                     <div class="find-invisible-field"></div>
                                 </div>
@@ -53,12 +47,12 @@ Input::get('rooms',[]);
 
                             <div  class="main-find-city">
                                 <input id="mainCity" name="city" type="hidden"
-                                       value="{{ $_GET['city'] or '' }}">
+                                       value="{{ Request::input('city') or '' }}">
                                 <div class="main-find-city-btn bd-params">
                                     <span class="main_city_span">
                                     <?php
-                                    if (isset($_GET['city'])):?>
-                                        {{ $_GET['city'] or '' }}
+                                    if (Request::input('city')):?>
+                                        {{ Request::input('city') or '' }}
                                     <?php else :?>
                                         Выберите город
                                     <?php endif; ?>
@@ -122,12 +116,12 @@ Input::get('rooms',[]);
 
                             <div  class="main-find-rayon">
                                 <input id="mainRayon" name="region" type="hidden"
-                                       value="<?= (Input::has('region')) ? Input::get('region') : '' ?>">
+                                       value="<?= Request::input('region') ? Request::input('region') : '' ?>">
                                 <div class="main-find-rayon-btn bd-params not_active">
                                     <span class="main_rayon_span">
 
-                                        @if (Input::has('region'))
-                                            <?= Input::get('region') ?>
+                                        @if (Request::input('region'))
+                                            <?= Request::input('region') ?>
                                         @else
                                             Выберите район
                                         @endif
@@ -183,7 +177,7 @@ Input::get('rooms',[]);
                                     $rooms = array(1=>'1-комнатные',2=>'2-комнатные', 3=>'3-комнатные', 4=>'4-комнатные', 5=>'5+-комнатные');
 
                                     foreach ($rooms as $key =>$value) : ?>
-                                        <option <?= (Input::has('rooms') && in_array($key, Input::get('rooms'))) ? "selected='selected'" : ""; ?> value="<?= $key ?>">
+                                        <option <?= (Request::input('rooms') && in_array($key, Request::input('rooms'))) ? "selected='selected'" : ""; ?> value="<?= $key ?>">
                                             <?= $value ?>
                                         </option>
                                     <?php endforeach; ?>
@@ -211,7 +205,7 @@ Input::get('rooms',[]);
                             <div class="main-find-price-box">
                                 <div class="main-find-price-f">
                                     <input  class="m-f-price-input" name="price_min" type="text" placeholder="Цена от"
-                                            value="{{ Input::has('price_min')? Input::get('price_min'): '' }}">
+                                            value="{{ Request::input('price_min') ?? '' }}">
                                 </div>
 
                                 <div class="main-find-hr-box">
@@ -220,7 +214,7 @@ Input::get('rooms',[]);
 
                                 <div class="main-find-price-l">
                                     <input  class="m-f-price-input" name="price_max" type="text" placeholder="Цена до"
-                                            value="{{ Input::has('price_max')? Input::get('price_max'): '' }}">
+                                            value="{{ Request::input('price_max') ?? '' }}">
                                 </div>
                             </div>
 
@@ -236,7 +230,7 @@ Input::get('rooms',[]);
                                     $years = array('Сданные', 2018, 2019, 2020,  '2021+');
 
                                     foreach ($years as $value) : ?>
-                                        <option <?= (Input::has('year') && in_array($key, Input::get('year'))) ? "selected='selected'" : ""; ?> value="<?= $value ?>">
+                                        <option <?= (Request::input('year') && in_array($key, Request::input('year'))) ? "selected='selected'" : ""; ?> value="<?= $value ?>">
                                             <?= $value ?>
                                         </option>
                                     <?php endforeach; ?>
