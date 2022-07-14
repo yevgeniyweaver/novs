@@ -6,10 +6,4 @@ docker-compose up -d
 
 docker-compose exec fpm /bin/bash
 
-#Run necessary commands:
-
 composer install
-
-php artisan migrate
-
-php artisan db:seed
