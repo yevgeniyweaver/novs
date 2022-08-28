@@ -27,7 +27,10 @@ RUN docker-php-ext-configure zip
 RUN pecl install -o -f redis \
     &&  rm -rf /tmp/pear \
     &&  docker-php-ext-enable redis
-
+#  Install Imagick extention
+RUN apt-get update && apt-get install -y libmagickwand-dev --no-install-recommends && rm -rf /var/lib/apt/lists/*
+RUN printf "\n" | pecl install imagick
+RUN docker-php-ext-enable imagick
 # Install composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
@@ -49,7 +52,7 @@ USER www-data
 
 #RUN chmod go+w /var/www/novs/storage/logs/laravel.log
 
-RUN chmod -R o+w /var/www/novs/storage/ && php artisan config:clear
+RUN chmod -R o+w /var/www/novs/storage/ #&& php artisan config:clear
 
 #chown -R www-data:www-data /var/www/novs/storage \
 #chown -R www-data:www-data storage &&
